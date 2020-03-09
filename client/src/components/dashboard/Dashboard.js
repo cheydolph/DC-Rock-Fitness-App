@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
+
+import WorkoutCard from "./WorkoutCard";
+
 class Dashboard extends Component {
   onLogoutClick = e => {
     e.preventDefault();
@@ -16,7 +19,7 @@ class Dashboard extends Component {
             <h4>
               <b>Hey there,</b> {user.name.split(" ")[0]}
               <p className="flow-text grey-text text-darken-1">
-                We can expand the dashboard from here
+                Here's you're workout for today
               </p>
             </h4>
             <button
@@ -31,6 +34,7 @@ class Dashboard extends Component {
             >
               Logout
             </button>
+            <WorkoutCard/>
           </div>
         </div>
       </div>
