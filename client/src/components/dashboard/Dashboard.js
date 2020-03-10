@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 
-import WorkoutContainer from "./WorkoutContainer";
+import WorkoutCard from "./WorkoutCard";
 
 class Dashboard extends Component {
   onLogoutClick = e => {
@@ -13,15 +13,17 @@ class Dashboard extends Component {
   render() {
     const { user } = this.props.auth;
     return (
-      <div style={{ height: "75vh" }} className="container valign-wrapper">
+      <div style={{ height: "75vh", marginTop:"50px" }} className="container valign-wrapper">
         <div className="row">
           <div className="col s12 center-align">
             <h4>
               <b>Hey there,</b> {user.name.split(" ")[0]}
-              <p className="flow-text grey-text text-darken-1">
-                Here's you're workout for today
+              <p className="flow-text white-text text-darken-1">
+                Here's your workout for today
               </p>
             </h4>
+            <WorkoutCard/>            
+            <WorkoutCard/>
             <button
               style={{
                 width: "150px",
@@ -34,7 +36,6 @@ class Dashboard extends Component {
             >
               Logout
             </button>
-            <WorkoutContainer/>
           </div>
         </div>
       </div>
