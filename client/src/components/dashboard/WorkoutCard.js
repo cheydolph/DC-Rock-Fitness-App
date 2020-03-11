@@ -31,7 +31,7 @@ const WorkoutCard = (props) => {
             
             <div class="container">
                 <h3 className='center-align'>Legs and Shoulders</h3>
-                <p>Today we are going to work on legs and shoulders. Make sure you have good form! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <p>Today we are going to work on legs and shoulders. Make sure you have good form!</p>
                 <div style={{padding: "0", borderWidth: "2px", borderColor:"black", borderStyle:"inset"}}>
                         <button type="button" class="collapsible" onClick={toggleToggle1}
                             style={{backgroundColor: "#eee",

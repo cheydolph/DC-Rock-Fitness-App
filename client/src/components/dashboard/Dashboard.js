@@ -23,7 +23,6 @@ class Dashboard extends Component {
               </p>
             </h4>
             <WorkoutCard/>            
-            <WorkoutCard/>
             <button
               style={{
                 width: "150px",
