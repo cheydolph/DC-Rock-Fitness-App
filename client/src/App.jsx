@@ -13,7 +13,7 @@ import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css'
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -39,7 +39,7 @@ class App extends Component {
     return (
       <Provider store={store}>
         <Router>
-          <div className="App">            
+          <div className="App">
             <Route exact path="/" component={Landing} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
