@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 import "./Navbar.css";
+import logo from './logo-full.svg';
 
 const NavigationBar = (props) => {
   return (
     <ul className='sidenav'>
-      <h1>DC</h1>
-      <h2>ROCK</h2>
+      <img src={logo} className='logo' />
       <h3>Daily</h3>
       <li><a href='/Fitness'><i className="material-icons">fitness_center</i>{' '}Workout</a></li>
       <li><a href='/Calendar'><i className="material-icons">local_dining</i>{' '}Nutrition</a></li>

@@ -21,11 +21,13 @@
     text-decoration: none;
     font-size: 20px;
     color: #818181;
-    display: inline-block;    
+    display: inline-block;   
+    font-family: 'Lekton', sans-serif;
+    letter-spacing: 1px; 
 }
 
 .sidenav i {
-    margin-right: 10px;
+    margin-right: 5px;
 }
   
 /* When you mouse over the navigation links, change their color */
@@ -37,23 +39,17 @@
 .sidenav h3 {
     padding-left: 50px;
     padding-top: 50px;
-    padding-bottom: 10px;
+    padding-bottom: 5px;
     text-transform: uppercase;
     color: crimson;
-    font-size: 25px;
+    font-size: 30px;
+    font-family: 'Lekton', sans-serif;
+    letter-spacing: 2px;
 }
 
-.sidenav h1 h2{    
-    font-family: 'Archivo Black', sans-serif;
-    padding-left: 50px;    
-    color: white;    
-}
-
-.sidenav h1{
-    font-size: 70px;    
-    padding-bottom: 0px;    
-}
-
-.sidenav h2 {
-    font-size: 35px;
+.logo {
+    width: 100px;
+    height: 100px;
+    padding-left: 70px;
+    padding-top: 30px;
 }
