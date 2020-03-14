@@ -29,8 +29,8 @@ class Dashboard extends Component {
     return (
       <body style={{ marginLeft: '250px' }}>
         <NavigationBar />
-        <h1 style={{ marginLeft: '5rem', marginTop: '4rem', fontSize: '20px' }}>{user.name},</h1>
-        <h1 style={{ marginLeft: '5rem', fontSize: '50px' }}> Here's Today's Workout:</h1>
+        <h1 style={{ marginLeft: '5rem', marginTop: '4rem', fontSize: '30px' }}>{user.name},</h1>
+        <h1 style={{ marginLeft: '5rem', fontSize: '60px' }}> Here's Today's Workout:</h1>
         <ExerciseCard></ExerciseCard>
       </body >
     );
