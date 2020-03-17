@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 
-import { logoutUser } from "../../actions/authActions";
+import { logoutUser } from "../../actions/user.actions";
 
 import NavigationBar from "../layout/Navbar";
 import ExerciseCard from "./ExerciseCard";
