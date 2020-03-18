@@ -7,7 +7,7 @@ import logo from './logo-full.svg';
 const NavigationBar = (props) => {
   return (
     <ul className='sidenav'>
-      <img src={logo} className='logo' />
+      <img src={logo} className='logo' alt='Logo'/>
       <h3>Daily</h3>
       <li><a href='/Fitness'><i className="material-icons">fitness_center</i>{' '}Workout</a></li>
       <li><a href='/Calendar'><i className="material-icons">local_dining</i>{' '}Nutrition</a></li>

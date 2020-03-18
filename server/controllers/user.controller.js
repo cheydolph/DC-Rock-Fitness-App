@@ -57,7 +57,7 @@ const login = (req, res, next) => {
     bcrypt.compare(password, user.password).then(isMatch => {
       if (isMatch) {
         // User matched; create JWT payload
-        const payload = { id: user.id, name: user.name };
+        const payload = { id: user.id, name: user.name, email: user.email};
         // Sign token
         jwt.sign(
           payload,
@@ -89,8 +89,9 @@ const getUserById = function(req, res, next) {
 };
 
 const getWorkout = function(req, res, next) {
+  console.log(req.params.userId + ' ' + req.params.date);
   Workout
-    .find({ email: req.body.email, date: new Date(req.body.date) })
+    .findOne({ userId: req.params.userId, date: new Date(req.params.date) })
     .populate('exercises')
     .exec((err, workout) => {
       res.status(200).json(workout);

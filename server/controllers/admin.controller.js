@@ -12,8 +12,9 @@ const addExercise = (req, res, next) => {
 const assignWorkout = (req, res, next) => {    
     console.log(req.body.exercises[0]);
     let workout = new Workout(req.body);
-    for (let exercise in req.body.exercises) {
-        workout.exercises.push(exercise);
+    for (let exercise of req.body.exercises) {
+        console.log(exercise);
+        workout.exercises.push(mongoose.Types.ObjectId(exercise));
     }
     //workout.exercises[0] = mongoose.Types.ObjectId(req.body.exercises[0]);
     workout.save((err, workout) => {
