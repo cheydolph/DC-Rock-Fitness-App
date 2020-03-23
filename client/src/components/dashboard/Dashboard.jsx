@@ -32,9 +32,9 @@ class Dashboard extends Component {
         <NavigationBar />
         <h1 style={{ marginLeft: '5rem', marginTop: '4rem', fontSize: '30px', fontFamily: 'Lekton' }}>{user.name},</h1>
         <h1 style={{ marginLeft: '5rem', fontSize: '60px', fontFamily: 'Lekton' }}> Here's Today's Workout:</h1>        
-        {this.state.workout.exercises && this.state.workout.exercises.map(item => {
+        {this.state.workout.exercises != null && this.state.workout.exercises.map(item => {
           return <ExerciseCard exercise={item}/>
-        })}
+        })}}
         <button onClick={this.onLogoutClick}>Logout</button>
       </body >      
     );
