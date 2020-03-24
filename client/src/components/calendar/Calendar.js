@@ -1,11 +1,13 @@
 import React from "react";
-import dateFns from "date-fns"
+import * as dateFns from "date-fns"
 
 class Calendar extends React.Component {
     state = {currentMonth: new Date(), selectedDate: new Date()};
     
+    
     renderHeader() {
-        const dateFormat = "MMMM YYYY"; //MM YYYY?
+        const dateFormat = "MMMM yyyy"; //MM YYYY?
+       // console.log(this.selectedDate);
 
         return (
             <div className = "header row flex-middle">
@@ -52,7 +54,7 @@ class Calendar extends React.Component {
         const startDate = dateFns.startOfWeek(monthStart);
         const endDate = dateFns.endOfWeek(monthEnd);
 
-        const dateFormat = "D";
+        const dateFormat = "d";
         const rows = [];
 
         let days = [];
@@ -63,6 +65,7 @@ class Calendar extends React.Component {
             for (let i =0; i < 7; i++) {
                 formattedDate = dateFns.format(day, dateFormat);
                 const cloneDay = day;
+                //console.log(cloneDay)
                 days.push(
                     <div
                         className = {`col cell ${
@@ -71,7 +74,8 @@ class Calendar extends React.Component {
                             : dateFns.isSameDay(day, selectedDate) ? "selected" : ""
                         }`}
                         key = {day}
-                        onClick = {() => this.onDateClick(dateFns.parse(cloneDay))}
+                        onClick = {() => this.onDateClick(cloneDay)}// change happened here
+                       
                     >
                         <span className = "number">{formattedDate}</span>
                         <span className = "bg">{formattedDate}</span>
@@ -93,6 +97,7 @@ class Calendar extends React.Component {
         this.setState({
             selectedDate: day
         });
+        console.log(day, "this is selected day")
     };
 
     nextMonth = () => {
