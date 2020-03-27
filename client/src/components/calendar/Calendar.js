@@ -1,9 +1,19 @@
 import React from "react";
 import dateFns from "date-fns"
+import NavigationBar from "../layout/Navbar";
 
 class Calendar extends React.Component {
     state = {currentMonth: new Date(), selectedDate: new Date()};
-    
+
+
+    renderNav(){
+      return(
+        <body style={{ marginLeft: '250px' }}>
+          <NavigationBar />
+        </body >
+      );
+    }
+
     renderHeader() {
         const dateFormat = "MMMM YYYY"; //MM YYYY?
 
@@ -109,10 +119,11 @@ class Calendar extends React.Component {
 
     render() {
         return (
-            <div className = "calendar">
+            <div className = "calendar" style = {{marginLeft: '15rem',}}>>
                 {this.renderHeader()}
                 {this.renderDays()}
                 {this.renderCells()}
+                {this.renderNav()}
             </div>
         );
     }
