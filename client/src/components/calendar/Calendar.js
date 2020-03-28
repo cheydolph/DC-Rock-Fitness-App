@@ -1,126 +1,155 @@
-import React from "react";
-import * as dateFns from "date-fns"
 
-class Calendar extends React.Component {
-    state = {currentMonth: new Date(), selectedDate: new Date()};
-    
-    
-    renderHeader() {
-        const dateFormat = "MMMM yyyy"; //MM YYYY?
-       // console.log(this.selectedDate);
+import React, { useState } from "react";
+import * as dateFns from "date-fns";
 
-        return (
-            <div className = "header row flex-middle">
-                <div className = "col col-start">
-                    <div className = "icon" onClick = {this.prevMonth}>
-                        chevron_left
-                    </div>
-                </div>
-                <div className = "col col-center">
-                    <span>
-                        {dateFns.format(this.state.currentMonth, dateFormat)}
-                    </span>
-                </div>
-                <div className = "col col-end" onClick = {this.nextMonth}>
-                    <div className = "icon">
-                        chevron_right
-                    </div>
-                </div>
-            </div>
-        );
-    }
+import "./Calendar.css";
+import axios from "axios"
 
-    renderDays() {
-        const dateFormat = "dddd";
-        const days = [];
+const Calendar = () => {
+const [currentDate, setCurrentDate] = useState(new Date());
+const [selectedDate, setSelectedDate] = useState(new Date());
+const [name, setName] = useState('')
+const [email, setEmail] = useState('')
+const [message, setMessage] = useState('');
 
-        let startDate = dateFns.startOfWeek(this.state.currentMonth);
+const handleClick = (e) =>{
+  e.preventDefault();
+  if(e.target.id ==="name"){
+    setName(e.target.value)
+  }else if(e.target.id ===  "email"){
+    setEmail(e.target.value)
+  }
+  else{
+      
+      setMessage(e.target.value);
+  }
+} 
 
-        for (let i = 0; i < 7; i++) {
-            days.push(
-                <div className = "col col-center" key = {i}>
-                    {dateFns.format(dateFns.addDays(startDate, i), dateFormat)}
-                </div>
-            );
-        }
+const handleSubmit = (e) =>{
+  e.preventDefault();
 
-        return <div className = "days row">{days}</div>
-    }
+  const dataToSubmit = {
+     name,
+     email,
+     message: `Appointment at ${selectedDate}. 
 
-    renderCells() {
-        const {currentMonth, selectedDate} = this.state;
-        const monthStart = dateFns.startOfMonth(currentMonth);
-        const monthEnd = dateFns.endOfMonth(monthStart);
-        const startDate = dateFns.startOfWeek(monthStart);
-        const endDate = dateFns.endOfWeek(monthEnd);
 
-        const dateFormat = "d";
-        const rows = [];
+    Appointment description: ${message}
+     `,
+  }
+  //console.log(dataToSubmit);
 
-        let days = [];
-        let day = startDate;
-        let formattedDate = "";
-
-        while (day <= endDate) {
-            for (let i =0; i < 7; i++) {
-                formattedDate = dateFns.format(day, dateFormat);
-                const cloneDay = day;
-                //console.log(cloneDay)
-                days.push(
-                    <div
-                        className = {`col cell ${
-                            !dateFns.isSameMonth(day, monthStart)
-                            ? "disabled"
-                            : dateFns.isSameDay(day, selectedDate) ? "selected" : ""
-                        }`}
-                        key = {day}
-                        onClick = {() => this.onDateClick(cloneDay)}// change happened here
-                       
-                    >
-                        <span className = "number">{formattedDate}</span>
-                        <span className = "bg">{formattedDate}</span>
-                    </div>
-                );
-                day = dateFns.addDays(day, 1);
-            }
-            rows.push(
-                <div className = "row" key = {day}>
-                    {days}
-                </div>
-            );
-            days = [];
-        }
-        return <div className = "body">{rows}</div>
-    }
-
-    onDateClick = (day) => {
-        this.setState({
-            selectedDate: day
-        });
-        console.log(day, "this is selected day")
-    };
-
-    nextMonth = () => {
-        this.setState({
-            currentMonth: dateFns.addMonths(this.state.currentMonth ,1)
-        });
-    };
-
-    prevMonth = () => {
-        this.setState({
-            currentMonth: dateFns.subMonths(this.state.currentMonth, 1)
-        });
-    };
-
-    render() {
-        return (
-            <div className = "calendar">
-                {this.renderHeader()}
-                {this.renderDays()}
-                {this.renderCells()}
-            </div>
-        );
-    }
+  axios
+  .post('/users/calendar', dataToSubmit)
+  .then((res) => console.log('data Sent', res.data))
+  .catch(err => {
+    console.error(err);
+  });
 }
 
+const form = () => {
+    return (
+        <div >
+          
+            
+            <form onSubmit={handleSubmit} style={{width: '600px'}}>
+            <input id="name" placeholder="Name" value = {name} onChange={handleClick}/><br/>
+            <input id="email" placeholder="Email" value = {email} onChange={handleClick}/><br/>
+            <input id="message" placeholder="Appointment Description" value = {message} onChange={handleClick}/><br/>
+            <button onClick={handleSubmit}> Confrim Appointment </button>
+            </form>
+    
+        
+        </div>
+      );
+}
+
+const header = () => {
+const dateFormat = "MMMM yyyy";
+return (
+   <div className="header row flex-middle">
+      <div className="column col-start">
+         <div className="icon" onClick={prevMonth}>
+            chevron_left
+         </div>
+      </div>
+      <div className="column col-center">
+         <span>{dateFns.format(currentDate, dateFormat)}</span>
+      </div>
+      <div className="column col-end">
+         <div className="icon" onClick={nextMonth}>
+            chevron_right
+         </div>
+      </div>
+   </div>
+   );
+};
+const days = () => {
+const dateFormat = "ddd";
+const days = [];
+let startDate = dateFns.startOfWeek(currentDate);
+for (let i = 0; i < 7; i++) {
+      days.push(
+         <div className="column col-center" key={i}>
+         {dateFns.format(dateFns.addDays(startDate, i), dateFormat)}
+         </div>
+      );
+   }
+   return <div className="days row">{days}</div>;
+};
+const cells = () => {
+const monthStart = dateFns.startOfMonth(currentDate);
+const monthEnd = dateFns.endOfMonth(monthStart);
+const startDate = dateFns.startOfWeek(monthStart);
+const endDate = dateFns.endOfWeek(monthEnd);
+const dateFormat = "d";
+const rows = [];
+let days = [];
+let day = startDate;
+let formattedDate = "";
+while (day <= endDate) {
+   for (let i = 0; i < 7; i++) {
+   formattedDate = dateFns.format(day, dateFormat);
+   const cloneDay = day;
+days.push(
+      <div 
+       className={`column cell ${!dateFns.isSameMonth(day, monthStart)
+       ? "disabled" : dateFns.isSameDay(day, selectedDate) 
+       ? "selected" : "" }`} 
+       key={day} 
+       onClick={() => onDateClick((cloneDay))}
+       > 
+       <span className="number">{formattedDate}</span>
+       <span className="bg">{formattedDate}</span>
+     </div>
+     );
+   day = dateFns.addDays(day, 1);
+  }
+rows.push(
+      <div className="row" key={day}> {days} </div>
+    );
+   days = [];
+ }
+ return <div className="body">{rows}</div>;
+}
+const nextMonth = () => {
+   setCurrentDate(dateFns.addMonths(currentDate, 1));
+};
+const prevMonth = () => {
+   setCurrentDate(dateFns.subMonths(currentDate, 1));
+};
+const onDateClick = day => {
+setSelectedDate(day);
+
+console.log(day,"this is the new day")
+}
+return (
+   <div className="calendar">
+      <div>{header()}</div>
+      <div>{days()}</div>
+      <div>{cells()}</div>
+        <div>{form()}</div>
+   </div>
+  );
+};
 export default Calendar;

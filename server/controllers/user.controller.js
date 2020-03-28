@@ -1,5 +1,6 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const {sendEmail} = require("../mail")
 
 const keys = require("../config/config");
 const User = require("../models/User.model");
@@ -97,9 +98,21 @@ const getWorkout = function(req, res, next) {
     });
 };
 
+const sendAppointment = (req, res, next) => {
+  console.log(req.body, "this is here")
+  sendEmail(req.body.email, req.body.name, req.body.message, "Appointment",(err,data) => {
+    if(err){
+      res.status(500).json({message: 'Internal Error'});
+    }else{
+      res.json({message: 'Email Sent!!'});
+    }
+  })
+}
+
 module.exports = {
   register,
   login,
   getUserById,
-  getWorkout
+  getWorkout,
+  sendAppointment
 };
