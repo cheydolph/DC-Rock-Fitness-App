@@ -6,9 +6,14 @@ const ExerciseSchema = new Schema({
         type: String,
         required: true
     },
+    isStretch: {
+        type: Boolean
+    },
     reps: {
-        type: String,
-        required: true
+        type: Number,
+    },
+    duration: {
+        type: Number
     },
     notes: {
         type: Array
