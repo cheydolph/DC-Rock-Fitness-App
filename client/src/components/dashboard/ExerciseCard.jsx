@@ -21,6 +21,9 @@ const ExerciseCard = ({exercise}) => {
             <div className='card-container'>
                 <h3 className='card-header'>{exercise.name}</h3>
                 <h2 className='num-reps'>x{exercise.reps}</h2>
+                <ul style = {{paddingLeft: '20px'}}>
+                    <li style={{color: 'white'}}>{exercise.notes[0]}</li>
+                </ul>
             </div>
         </div >
     );

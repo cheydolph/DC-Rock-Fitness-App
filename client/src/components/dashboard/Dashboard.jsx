@@ -30,13 +30,15 @@ class Dashboard extends Component {
     return (
       <body style={{ marginLeft: '250px' }}>
         <NavigationBar />
-        <h1 style={{ marginLeft: '5rem', marginTop: '4rem', fontSize: '30px', fontFamily: 'Lekton' }}>{user.name},</h1>
-        <h1 style={{ marginLeft: '5rem', fontSize: '60px', fontFamily: 'Lekton' }}> Here's Today's Workout:</h1>        
-        {this.state.workout.exercises != null && this.state.workout.exercises.map(item => {
-          return <ExerciseCard exercise={item}/>
-        })}}
+        <h1 style={{ marginLeft: '5rem', marginTop: '4rem', fontSize: '30px', fontFamily: 'Lekton', paddingLeft: '250px' }}>{user.name},</h1>
+        <h1 style={{ marginLeft: '5rem', fontSize: '60px', fontFamily: 'Lekton', paddingLeft: '250px' }}> Here's Today's Workout:</h1>
+        <div style={{display: 'flex', paddingLeft: '200px'}}>
+          {this.state.workout.exercises != null && this.state.workout.exercises.map(item => {
+            return <ExerciseCard exercise={item}/>
+          })}
+        </div>       
         <button onClick={this.onLogoutClick}>Logout</button>
-      </body >      
+      </body>
     );
   }
 }
