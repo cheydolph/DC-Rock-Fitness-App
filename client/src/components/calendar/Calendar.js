@@ -28,7 +28,7 @@ const handleClick = (e) =>{
 
 const handleSubmit = (e) =>{
   e.preventDefault();
-  if(name === "" || email === "" || message === ""){
+  if(name === "" || email === "" || message === ""){ //requires the name,email, and description is required
       alert("Name, Email, and Description are requried")
   }
   else{
@@ -40,7 +40,7 @@ const handleSubmit = (e) =>{
 Appointment description: ${message}
      `,
   }
-  //console.log(dataToSubmit);
+  
 
   axios
   .post('/users/calendar', dataToSubmit)
@@ -48,6 +48,11 @@ Appointment description: ${message}
   .catch(err => {
     console.error(err);
   });
+
+  //this resets the input fields after submission
+  setName("");
+  setEmail("");
+  setMessage("");
 }
 }
 
@@ -60,7 +65,7 @@ const form = () => {
             <input id="name" placeholder="Name"  value = {name} onChange={handleClick} className="inputText" /><br/>
             <input id="email" placeholder="Email" value = {email} onChange={handleClick} className="inputText" /><br/>
             <input id="message" placeholder="Appointment Description" value = {message} className="inputMes" onChange={handleClick} /><br/>
-            <button onClick={handleSubmit} className="myButton"> Confrim Appointment </button>
+            <button onClick={handleSubmit} className="myButton"> Confirm Appointment </button>
             </form>
     
         
