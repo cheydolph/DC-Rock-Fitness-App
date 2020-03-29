@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import * as dateFns from "date-fns";
 
 import "./Calendar.css";
+import "./form.css"
 import axios from "axios"
 
 const Calendar = () => {
@@ -27,14 +28,16 @@ const handleClick = (e) =>{
 
 const handleSubmit = (e) =>{
   e.preventDefault();
-
+  if(name === "" || email === "" || message === ""){
+      alert("Name, Email, and Description are requried")
+  }
+  else{
   const dataToSubmit = {
      name,
      email,
-     message: `Appointment at ${selectedDate}. 
-
-
-    Appointment description: ${message}
+     message: 
+     `Appointment is with ${name} on ${selectedDate}. 
+Appointment description: ${message}
      `,
   }
   //console.log(dataToSubmit);
@@ -46,17 +49,18 @@ const handleSubmit = (e) =>{
     console.error(err);
   });
 }
+}
 
 const form = () => {
     return (
         <div >
           
-            
-            <form onSubmit={handleSubmit} style={{width: '600px'}}>
-            <input id="name" placeholder="Name" value = {name} onChange={handleClick}/><br/>
-            <input id="email" placeholder="Email" value = {email} onChange={handleClick}/><br/>
-            <input id="message" placeholder="Appointment Description" value = {message} onChange={handleClick}/><br/>
-            <button onClick={handleSubmit}> Confrim Appointment </button>
+          
+            <form onSubmit={handleSubmit}>
+            <input id="name" placeholder="Name"  value = {name} onChange={handleClick} className="inputText" /><br/>
+            <input id="email" placeholder="Email" value = {email} onChange={handleClick} className="inputText" /><br/>
+            <input id="message" placeholder="Appointment Description" value = {message} className="inputMes" onChange={handleClick} /><br/>
+            <button onClick={handleSubmit} className="myButton"> Confrim Appointment </button>
             </form>
     
         
@@ -148,7 +152,8 @@ return (
       <div>{header()}</div>
       <div>{days()}</div>
       <div>{cells()}</div>
-        <div>{form()}</div>
+        
+   <div> {form()}</div>
    </div>
   );
 };
