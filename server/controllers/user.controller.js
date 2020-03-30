@@ -1,23 +1,16 @@
-const express = require("express");
-const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const keys = require("../../config/config");
+const {sendemail} = require("../mail")
 
-// Load input validation
-const validateRegisterInput = require("../../validation/register");
-const validateLoginInput = require("../../validation/login");
+const keys = require("../config/config");
+const User = require("../models/User.model");
+const Exercise = require('../models/Exercise.model');
+const Workout = require('../models/Workout.model');
+const validateRegisterInput = require("../validation/register");
+const validateLoginInput = require("../validation/login");
 
-// Load user model
-const User = require("../../models/User");
-
-// @route POST api/users/register
-// @desc Register user
-// @access Public
-router.post("/register", (req, res) => {
-  // Form validation
-  const { errors, isValid } = validateRegisterInput(req.body);
-  // Check validation
+const register = (req, res, next) => {
+  const { errors, isValid } = validateRegisterInput(req.body);  
   if (!isValid) {
     return res.status(400).json(errors);
   }
@@ -45,16 +38,10 @@ router.post("/register", (req, res) => {
       });
     }
   });
-});
+};
 
-// @route POST api/users/login
-// @desc Login user nd return JWT token
-// @access Public
-router.post("/login", (req, res) => {
-  // Form validation
+const login = (req, res, next) => {
   const { errors, isValid } = validateLoginInput(req.body);
-
-  // Check validation
   if (!isValid) {
     return res.status(400).json(errors);
   }
@@ -62,7 +49,6 @@ router.post("/login", (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
 
-  // Find user by email
   User.findOne({ email }).then(user => {
     // Check if user exists
     if (!user) {
@@ -87,6 +73,46 @@ router.post("/login", (req, res) => {
       }
     });
   });
-});
+};
 
-module.exports = router;
+const getUserById = function(req, res, next) {
+  User.findOne({ email: req.body.email })
+    .populate('workouts')
+    .exec((err, user) => {
+      if (err || !user) {
+        return res.status(400).json({
+          error: 'User not found'
+        });        
+      }
+      req.user = user;
+      next();
+    }); 
+};
+
+const getWorkout = function(req, res, next) {
+  Workout
+    .find({ email: req.body.email, date: new Date(req.body.date) })
+    .populate('exercises')
+    .exec((err, workout) => {
+      res.status(200).json(workout);
+    });
+};
+
+const sendAppointment = (req, res, next) => {
+  console.log(req.body, "this is here")
+  sendemail(req.body.email, req.body.name, req.body.message, "Appointment",(err,data) => {
+    if(err){
+      res.status(500).json({message: 'Internal Error'});
+    }else{
+      res.json({message: 'Email Sent!!'});
+    }
+  })
+}
+
+module.exports = {
+  register,
+  login,
+  getUserById,
+  getWorkout,
+  sendAppointment
+};
