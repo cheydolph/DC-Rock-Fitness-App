@@ -9,7 +9,7 @@ const validateRegisterInput = require("../validation/register");
 const validateLoginInput = require("../validation/login");
 
 const register = (req, res, next) => {
-  const { errors, isValid } = validateRegisterInput(req.body);  
+  const { errors, isValid } = validateRegisterInput(req.body);
   if (!isValid) {
     return res.status(400).json(errors);
   }
@@ -21,7 +21,8 @@ const register = (req, res, next) => {
       const newUser = new User({
         name: req.body.name,
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
+        isAdmin: (req.body.isAdmin == 'true')
       });
 
       // Hash passwords before saving in database
@@ -57,7 +58,7 @@ const login = (req, res, next) => {
     bcrypt.compare(password, user.password).then(isMatch => {
       if (isMatch) {
         // User matched; create JWT payload
-        const payload = { id: user.id, name: user.name, email: user.email};
+        const payload = { id: user.id, name: user.name, email: user.email };
         // Sign token
         jwt.sign(
           payload,
@@ -74,21 +75,21 @@ const login = (req, res, next) => {
   });
 };
 
-const getUserById = function(req, res, next) {
+const getUserById = function (req, res, next) {
   User.findOne({ email: req.body.email })
     .populate('workouts')
     .exec((err, user) => {
       if (err || !user) {
         return res.status(400).json({
           error: 'User not found'
-        });        
+        });
       }
       req.user = user;
       next();
-    }); 
+    });
 };
 
-const getWorkout = function(req, res, next) {
+const getWorkout = function (req, res, next) {
   console.log(req.params.userId + ' ' + req.params.date);
   Workout
     .findOne({ userId: req.params.userId, date: new Date(req.params.date) })
