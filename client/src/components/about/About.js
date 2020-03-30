@@ -19,7 +19,7 @@ render() {
 
 <body style={{ marginLeft: '250px' }}>
   <NavigationBar />
-  <h1 style={{  marginLeft: '5rem', fontSize: '60px', fontFamily: 'Lekton' }}> Contact</h1>
+  <h1 style={{  marginLeft: '5rem', fontSize: '60px', fontFamily: 'Lekton' }}> About Us</h1>
 
 </body >
 
@@ -35,49 +35,26 @@ render() {
    </div>
 
    <div style = {{marginLeft: '20rem',}}>
-      <h1 style = {{ fontFamily: 'Lekton', fontSize: '40px'}}>About Us</h1>
+      <h1 style = {{ fontFamily: 'Lekton', fontSize: '40px'}}>First Name Last Name</h1>
 
       <p style = {{ fontFamily: 'Lekton'}}> DC Fitness LLC is a private fitness training company. We offer our customers plenty of benefits to give them a leg up on the competition.</p>
-      <p style = {{ fontFamily: 'Lekton'}}> If you are interested in a private consulatation please contact me below:</p>
+      <br/>
+      <p style = {{ fontFamily: 'Lekton'}}> If you are interested in a private consulatation please request an appointment in the Calendar page.</p>
    </div>
 
 
 <br/>
 
-   <div style = {{marginLeft: '20rem'}}>
-   <form id="contact-form" onSubmit={this.handleSubmit.bind(this)} method="POST">
-    <div className="form-group">
-        <label htmlFor="name">Name:</label>
-        <input type="text" className="form-control" value={this.state.name} onChange={this.onNameChange.bind(this)} />
-    </div>
-    <div className="form-group">
-        <label htmlFor="exampleInputEmail1">Email address:</label>
-        <input type="email" className="form-control" aria-describedby="emailHelp" value={this.state.email} onChange={this.onEmailChange.bind(this)} />
-    </div>
-    <div className="form-group">
-        <label htmlFor="message">Message:</label>
-        <textarea className="form-control" rows="1" value={this.state.message} onChange={this.onMessageChange.bind(this)} />
-    </div>
-    <button style={{backgroundColor: 'crimson'}} className="btn btn-primary">Send Message!</button>
-    </form>
-    </div>
+<div style = {{marginLeft: '20rem',}}>
+
+
+   <p style = {{ fontFamily: 'Lekton'}}> Phone: 123-456-7890</p>
+   <p style = {{ fontFamily: 'Lekton'}}> Email: dc_fit@gmail.com</p>
+</div>
+
+
   </div>
  );
-}
-
-  onNameChange(event) {
-	this.setState({name: event.target.value})
-  }
-
-  onEmailChange(event) {
-	this.setState({email: event.target.value})
-  }
-
-  onMessageChange(event) {
-	this.setState({message: event.target.value})
-  }
-
-handleSubmit(event) {
 }
 }
 

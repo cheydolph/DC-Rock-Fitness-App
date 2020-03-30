@@ -20,7 +20,7 @@ render() {
    <body style={{ marginLeft: '250px' }}>
      <NavigationBar />
      <h1 style={{ marginLeft : '5rem', fontSize: '60px', fontFamily: 'Lekton' }}>Payment</h1>
-     <p1 style={{ marginLeft : '5rem', fontSize: '40px', fontFamily: 'Lekton' }}> We accept payment through the Cashapp. Click the logo below</p1>
+     <p1 style={{ marginLeft : '5rem', fontSize: '40px', fontFamily: 'Lekton' }}> We accept payment through the Cashapp. Click the logo below.</p1>
    </body >
 
 
