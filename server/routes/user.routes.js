@@ -11,4 +11,6 @@ router.route('/api/users/login')
 
 router.get('/users/workout', userContoller.getWorkout);
 
+router.post('/users/calendar', userContoller.sendAppointment);
+
 module.exports = router;
