@@ -13,6 +13,9 @@ import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
 import Calendar from "./components/calendar/Calendar";
+import About from "./components/about/About";
+import Payment from "./components/payment/Payment";
+import Resources from "./components/resources/Resources";
 import "./Calendar.css";
 
 import './App.css'
@@ -45,6 +48,10 @@ class App extends Component {
             <Route exact path="/" component={Landing} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
+            <Route exact path ="/contact" component = {About}/>
+            <Route exact path ="/payment" component = {Payment}/>
+	    <Route exact path ="/resources" component = {Resources}/>
+
             <div className="Calendar">
               <Route exact path="/Calendar" component={Calendar} />
             </div>
