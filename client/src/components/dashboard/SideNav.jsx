@@ -57,7 +57,7 @@ class SideNav extends Component {
         </Nav.Item>
         <Nav.Item>
           <Nav.Link href="/Contact">
-            <i className="material-icons">email</i> Contact
+            <i className="material-icons">account_box</i> About Us
           </Nav.Link>
         </Nav.Item>
         <Nav.Item>

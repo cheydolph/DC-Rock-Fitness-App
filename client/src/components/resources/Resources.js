@@ -26,8 +26,8 @@ class Resources extends React.Component {
           </Col>
           <Col>
             <div>
-              <body style={{ marginLeft: '250px' }}>
-                <h1 style={{ marginLeft: '5rem', fontSize: '60px', fontFamily: 'Lekton' }}> Resources</h1>
+              <body style={{}}>
+                <h1 style={{ fontSize: '60px', fontFamily: 'Lekton' }}> Resources</h1>
                 <ResourceCard></ResourceCard>
               </body >
             </div>

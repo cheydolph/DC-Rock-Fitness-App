@@ -26,19 +26,20 @@ class About extends React.Component {
           <Col>
             <div>
 
-              <body style={{ marginLeft: '250px' }}>
-                <h1 style={{ marginLeft: '5rem', fontSize: '60px', fontFamily: 'Lekton' }}> About Us</h1>
+              <body style={{}}>
+                <h1 style={{ fontSize: '60px', fontFamily: 'Lekton' }}>About Us</h1>
               </body >
-              <div style={{ marginLeft: '250px', width: 500, height: 'auto', marginLeft: '250px' }}>
+              <br/>
+              <div style={{ marginLeft: '100px', width: 500, height: 'auto'}}>
                 <img src={profilePic} alt="" />
               </div>
-              <div style={{ marginLeft: '20rem', }}>
+              <div style={{ marginLeft: '100px', }}>
                 <h1 style={{ fontFamily: 'Lekton', fontSize: '40px' }}>First Name Last Name</h1>
                 <p style={{ fontFamily: 'Lekton' }}> DC Fitness LLC is a private fitness training company. We offer our customers plenty of benefits to give them a leg up on the competition.</p>                <br />
                 <p style={{ fontFamily: 'Lekton' }}> If you are interested in a private consulatation please request an appointment in the Calendar page.</p>
               </div>
               <br />
-              <div style={{ marginLeft: '20rem', }}>
+              <div style={{ marginLeft: '100px', }}>
                 <p style={{ fontFamily: 'Lekton' }}> Phone: 123-456-7890</p>
                 <p style={{ fontFamily: 'Lekton' }}> Email: dc_fit@gmail.com</p>
               </div>

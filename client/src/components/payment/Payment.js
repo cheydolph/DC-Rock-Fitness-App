@@ -4,6 +4,7 @@ import SideNav from "../dashboard/SideNav";
 import Image from 'react-bootstrap/Image'
 import cashAppLogo from "../cash-app-png-1.png";
 
+
 class Payment extends React.Component {
   constructor(props) {
     super(props);
@@ -25,14 +26,14 @@ class Payment extends React.Component {
           <Col>
             <div>
               <body>
-                <h1>Payment</h1>
-                <p1> We accept payment through the Cashapp. Click the logo below.</p1>
+                <h1 style={{ fontSize: '60px', fontFamily: 'Lekton' }}>Payment</h1>
+                <p style = {{fontFamily: 'Lekton', fontSize: '40px' }}> We accept payment through the Cashapp. Click the logo below.</p>
               </body >
               <div>
                 <a href="https://cash.app/">
                   <Image src={cashAppLogo} responsive />
                 </a>
-                <h1> Cashtag: $DCFitness20</h1>
+                <h1 style={{ fontSize: '60px', fontFamily: 'Lekton' }}> Cashtag: $DCFitness20</h1>
               </div>
             </div>
           </Col>
