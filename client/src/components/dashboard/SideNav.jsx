@@ -24,9 +24,11 @@ class SideNav extends Component {
             />
           </Nav.Link>
         </Nav.Item>
+        <br/>
         <Nav.Item>
           <Nav.Link disabled>DAILY</Nav.Link>
         </Nav.Item>
+
         <Nav.Item>
           <Nav.Link href="/dashboard">
             <i className="material-icons">fitness_center</i> Workout
@@ -39,6 +41,11 @@ class SideNav extends Component {
         </Nav.Item>
         <Nav.Item>
           <Nav.Link disabled>OTHER</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link href="/">
+            <i className="material-icons">home</i> Home
+          </Nav.Link>
         </Nav.Item>
         <Nav.Item>
           <Nav.Link href="/Calendar">
@@ -60,6 +67,7 @@ class SideNav extends Component {
             <i className="material-icons">account_box</i> About Us
           </Nav.Link>
         </Nav.Item>
+        <br/>
         <Nav.Item>
           <Button onClick={this.onLogoutClick}>Logout</Button>
         </Nav.Item>
