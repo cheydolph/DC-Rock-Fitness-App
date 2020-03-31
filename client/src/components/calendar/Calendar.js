@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import * as dateFns from "date-fns";
@@ -7,8 +6,10 @@ import SideNav from "../dashboard/SideNav";
 import calendarStyles from "./Calendar.css";
 import axios from "axios"
 
+import Popup from "reactjs-popup";
+
 const Calendar = () => {
-   const [currentDate, setCurrentDate] = useState(new Date());
+   const [currentMonth, setCurrentMonth] = useState(new Date());
    const [selectedDate, setSelectedDate] = useState(new Date());
    const [name, setName] = useState('')
    const [email, setEmail] = useState('')
@@ -54,19 +55,22 @@ Appointment description: ${message}
          setName("");
          setEmail("");
          setMessage("");
+
+
       }
    }
 
    const form = () => {
       return (
          <div >
-
-
             <form onSubmit={handleSubmit}>
                <input id="name" placeholder="Name" value={name} onChange={handleClick} className="inputText" /><br />
+               <input id ="date" placeholder="Date" value = {(dateFns.format(selectedDate, "MM")).concat("/", dateFns.format(selectedDate, "dd"), "/", dateFns.format(selectedDate, "yyyy"))} className="inputText"/><br />
                <input id="email" placeholder="Email" value={email} onChange={handleClick} className="inputText" /><br />
                <input id="message" placeholder="Appointment Description" value={message} className="inputMes" onChange={handleClick} /><br />
-               <button onClick={handleSubmit} className="myButton"> Confirm Appointment </button>
+               <Popup trigger = {<button>Confirm Appointment</button>}>
+                  Appointment confirmed! Your appointment is on {(dateFns.format(selectedDate, "MM")).concat("/", dateFns.format(selectedDate, "dd"), "/", dateFns.format(selectedDate, "yyyy"))}.
+               </Popup>
             </form>
 
 
@@ -81,34 +85,34 @@ Appointment description: ${message}
             <div className="column col-start">
                <div className="icon" onClick={prevMonth}>
                   chevron_left
-         </div>
+                </div>
             </div>
             <div className="column col-center">
-               <span>{dateFns.format(currentDate, dateFormat)}</span>
+               {dateFns.format(currentMonth, dateFormat)}
             </div>
-            <div className="column col-end">
-               <div className="icon" onClick={nextMonth}>
+            <div className="column col-end" onClick={nextMonth}>
+               <div className="icon">
                   chevron_right
-         </div>
+               </div>
             </div>
          </div>
       );
    };
+
    const days = () => {
-      const dateFormat = "ddd";
       const days = [];
-      let startDate = dateFns.startOfWeek(currentDate);
-      for (let i = 0; i < 7; i++) {
-         days.push(
-            <div className="column col-center" key={i}>
-               {dateFns.format(dateFns.addDays(startDate, i), dateFormat)}
-            </div>
-         );
-      }
+      days.push(<div className="column col-center">Sunday</div>);
+      days.push(<div className ="column col-center">Monday</div>);
+      days.push(<div className ="column col-center">Tuesday</div>);
+      days.push(<div className ="column col-center">Wednesday</div>);
+      days.push(<div className ="column col-center">Thursday</div>);
+      days.push(<div className ="column col-center">Friday</div>);
+      days.push(<div className ="column col-center">Saturday</div>);
       return <div className="days row">{days}</div>;
    };
+
    const cells = () => {
-      const monthStart = dateFns.startOfMonth(currentDate);
+      const monthStart = dateFns.startOfMonth(currentMonth);
       const monthEnd = dateFns.endOfMonth(monthStart);
       const startDate = dateFns.startOfWeek(monthStart);
       const endDate = dateFns.endOfWeek(monthEnd);
@@ -127,7 +131,7 @@ Appointment description: ${message}
                      ? "disabled" : dateFns.isSameDay(day, selectedDate)
                         ? "selected" : ""}`}
                   key={day}
-                  onClick={() => onDateClick((cloneDay))}
+                  onClick={() => onDateClick(cloneDay)}
                >
                   <span className="number">{formattedDate}</span>
                   <span className="bg">{formattedDate}</span>
@@ -141,18 +145,22 @@ Appointment description: ${message}
          days = [];
       }
       return <div className="body">{rows}</div>;
-   }
+   };
+
    const nextMonth = () => {
-      setCurrentDate(dateFns.addMonths(currentDate, 1));
+      setCurrentMonth(dateFns.addMonths(currentMonth, 1));
    };
+
    const prevMonth = () => {
-      setCurrentDate(dateFns.subMonths(currentDate, 1));
+      setCurrentMonth(dateFns.subMonths(currentMonth, 1));
    };
+
    const onDateClick = day => {
       setSelectedDate(day);
 
-      console.log(day, "this is the new day")
-   }
+      //console.log(day, "this is the new day")
+   };
+
    return (
       <Container fluid>
          <Row>
