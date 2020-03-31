@@ -11,10 +11,10 @@ import Landing from "./components/layout/Landing";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
-import UserDash from "./components/dashboard/UserDash";
+import UserDash from "./components/dashboard/user/UserDash";
 
-import './App.css'
-import AdminDash from "./components/dashboard/AdminDash";
+import "./App.css";
+import AdminDash from "./components/dashboard/admin/AdminDash";
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -45,7 +45,9 @@ class App extends Component {
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <Switch>
-              <PrivateRoute exact path="/dashboard"
+              <PrivateRoute
+                exact
+                path="/dashboard"
                 userComponent={UserDash}
                 adminComponent={AdminDash}
               />

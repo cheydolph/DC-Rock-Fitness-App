@@ -5,7 +5,8 @@ import PropTypes from "prop-types";
 
 const PrivateRoute = ({ userComponent: UserDash, adminComponent: AdminDash, auth, ...rest }) => (
   <Route {...rest} render={props =>
-    auth.isAuthenticated ? <UserDash {...props} />
+    auth.isAuthenticated ?
+      (auth.user.isAdmin ? <AdminDash {...props} /> : <UserDash {...props} />)
       :
       <Redirect to="/login" />
   }

@@ -58,7 +58,12 @@ const login = (req, res, next) => {
     bcrypt.compare(password, user.password).then(isMatch => {
       if (isMatch) {
         // User matched; create JWT payload
-        const payload = { id: user.id, name: user.name, email: user.email };
+        const payload = {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          isAdmin: user.isAdmin
+        };
         // Sign token
         jwt.sign(
           payload,
