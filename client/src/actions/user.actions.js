@@ -1,6 +1,7 @@
 import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
+import moment from 'moment';
 
 import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./types";
 
@@ -30,6 +31,7 @@ export const loginUser = userData => dispatch => {
       setAuthToken(token);
       // Decode token to get user data
       const decoded = jwt_decode(token);
+      console.log(decoded);
       // Set current user
       dispatch(setCurrentUser(decoded));
     })
@@ -64,4 +66,21 @@ export const logoutUser = () => dispatch => {
   setAuthToken(false);
   // Set current user to empty object which will set isAuthenticated to false
   dispatch(setCurrentUser({}));
+};
+
+export const getWorkouts = function(id, date) {
+  console.log(id + ' ' + moment(date).format('YYYY-MM-DD'));
+  date = moment(date).format('YYYY-MM-DD');
+  return fetch('/users/' + id + '/workout/' + date, {method: 'GET'})
+    .then(response => {
+      return response.json()
+    }).catch(err => {
+      console.log(err);
+    });
+  /*return axios
+    .get('/users/' + id + '/workout/' + date)
+    .then(response => {
+      console.log(response.data);
+      return response.data;
+  }).catch((err) => console.log(err));*/  
 };
