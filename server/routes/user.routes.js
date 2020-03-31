@@ -9,7 +9,7 @@ router.route('/api/users/register')
 router.route('/api/users/login')
   .post(userContoller.login);
 
-router.get('/users/workout', userContoller.getWorkout);
+router.get('/users/:userId/workout/:date', userContoller.getWorkout);
 
 router.post('/users/calendar', userContoller.sendAppointment);
 
