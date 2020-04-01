@@ -38,7 +38,7 @@ const Calendar = () => {
             name,
             email,
             message:
-               `Appointment is with ${name} on ${selectedDate}.
+               `Appointment with ${name} on ${(dateFns.format(selectedDate, "MM")).concat("/", dateFns.format(selectedDate, "dd"), "/", dateFns.format(selectedDate, "yyyy"))}.
 Appointment description: ${message}
      `,
          }
