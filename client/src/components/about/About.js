@@ -18,11 +18,7 @@ class About extends React.Component {
     return (
       <Container fluid>
         <Row>
-          <Col xs={2} style={{ backgroundColor: "black", maxWidth: "250px" }}>
-            <Row style={{ height: "100vh" }}>
-              <SideNav />
-            </Row>
-          </Col>
+          <SideNav />
           <Col>
             <div>
 

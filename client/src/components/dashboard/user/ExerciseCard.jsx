@@ -1,5 +1,5 @@
 import React, { Component, useState } from "react";
-import { Card } from "react-bootstrap";
+import { Card, Button } from "react-bootstrap";
 import { ListGroup } from "react-bootstrap";
 
 const ExerciseCard = ({ exercise }) => {
@@ -13,13 +13,15 @@ const ExerciseCard = ({ exercise }) => {
       return "";
     }
   };
+  const viewVideoClicked = () => {
+    window.open(exercise.videoUrl, "_blank");
+  };
   return (
     <Card
-      border="light"
-      bg="primary"
-      text="white"
+      border="primary"
+      text="primary"
       style={{
-        maxWidth: "15rem"
+        maxWidth: "20rem"
       }}
     >
       <Card.Img
@@ -37,6 +39,9 @@ const ExerciseCard = ({ exercise }) => {
         </Card.Title>
         <Card.Text>{exercise.notes}</Card.Text>
       </Card.Body>
+      <Card.Footer className="text-center">
+        <Button onClick={viewVideoClicked}>Watch</Button>
+      </Card.Footer>
     </Card>
   );
 };
