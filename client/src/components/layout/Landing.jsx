@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import SideNav from "../dashboard/SideNav";
 import { Container, Row, Col } from 'react-bootstrap';
-import GymImage from '/landing.jpg';
 class Landing extends Component {
   render() {
     return (
