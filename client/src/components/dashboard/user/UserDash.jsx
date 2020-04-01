@@ -28,7 +28,7 @@ class UserDash extends Component {
   render() {
     const { user } = this.props.auth;
     return (
-      <Container fluid>
+      <Container fluid style={{padding: "0px"}}>
         <Row>
           <Col xs={2} style={{ backgroundColor: "black" }}>
             <Row style={{ height: "100vh" }}>

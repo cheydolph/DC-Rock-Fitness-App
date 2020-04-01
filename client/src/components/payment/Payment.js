@@ -16,7 +16,7 @@ class Payment extends React.Component {
   }
   render() {
     return (
-      <Container fluid>
+      <Container fluid style={{padding: "0px"}}>
         <Row>
           <Col xs={2} style={{ backgroundColor: "black", maxWidth: "250px" }}>
             <Row style={{ height: "100vh" }}>
