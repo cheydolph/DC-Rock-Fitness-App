@@ -1,41 +1,30 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import SideNav from "../dashboard/SideNav";
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col } from "react-bootstrap";
 class Landing extends Component {
   render() {
     return (
       <Container fluid style={{padding: "0px"}}>
         <Row>
-          <Col xs={2} style={{ backgroundColor: "black", maxWidth: "250px"}}>
-            <Row style={{ height: "100vh" }}>
-              <SideNav />
-            </Row>
-          </Col>
-          <Col>
-
-
-
-
-
+          <SideNav />
+          <Col className="text-center">
             <div>
-
-              <body style={{}}>
-                <h1 style={{ fontSize: '60px', fontFamily: 'Lekton' }}>Welcome to DC Fitness</h1>
-              </body >
-              <br/>
-
-              <div style={{ fontFamily: 'Lekton', fontSize: '40px' }} className="container valign-wrapper">
+              <h1>Welcome to DC Rock Fitness</h1>
+              <br />
+              <div
+                style={{ fontFamily: "Lekton", fontSize: "40px" }}
+                className="container valign-wrapper"
+              >
                 <div className="row">
                   <div className="col s12 center-align">
-                    <p className="flow-text grey-text text-darken-1">Click below to Login or Register</p>
+                    <p className="flow-text grey-text text-darken-1">
+                      Click below to Login or Register
+                    </p>
                     <br />
-
                   </div>
                 </div>
               </div>
-
-
               <div className="col s6">
                 <Link
                   to="/register"
@@ -62,32 +51,10 @@ class Landing extends Component {
                   Log In
                 </Link>
               </div>
-
-
-
-
-
             </div>
           </Col>
-
-
-
-
-
         </Row>
-
-
-
-
-
-
-
-
-
-
-
-
-            </Container>
+      </Container>
     );
   }
 }

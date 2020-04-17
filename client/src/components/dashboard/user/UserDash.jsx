@@ -8,6 +8,7 @@ import { logoutUser, getWorkouts } from "../../../actions/user.actions";
 import SideNav from "../SideNav";
 import ExerciseCard from "./ExerciseCard";
 import NutritionCard from "./NutritionCard";
+import DailyInfo from "./DailyInfo";
 
 class UserDash extends Component {
   state = {
@@ -30,28 +31,12 @@ class UserDash extends Component {
     return (
       <Container fluid style={{padding: "0px"}}>
         <Row>
-          <Col xs={2} style={{ backgroundColor: "black" }}>
-            <Row style={{ height: "100vh" }}>
-              <SideNav />
-            </Row>
-          </Col>
+          <SideNav />
           <Col>
-            <Row>
-              <h1>
-                Hey{" " + this.props.auth.user.name + ", "}
-                here's your workout for today:
-              </h1>
-            </Row>
-            <CardDeck>
-              {this.state.workout == null ? (
-                <p>You have no workout for today, enjoy the day off!</p>
-              ) : (
-                this.state.workout.exercises != null &&
-                this.state.workout.exercises.map(item => {
-                  return <ExerciseCard exercise={item} />;
-                })
-              )}
-            </CardDeck>
+            <DailyInfo
+              name={this.props.auth.user.name}
+              workout={this.state.workout}
+            />
           </Col>
         </Row>
       </Container>

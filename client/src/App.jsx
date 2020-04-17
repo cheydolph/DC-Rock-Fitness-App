@@ -18,6 +18,9 @@ import Resources from "./components/resources/Resources";
 import UserDash from "./components/dashboard/user/UserDash";
 import AdminDash from "./components/dashboard/admin/AdminDash";
 
+import fonts from "./assets/font.css";
+import "./assets/custom-bootstrap-theme.scss";
+
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
   // Set auth token header auth

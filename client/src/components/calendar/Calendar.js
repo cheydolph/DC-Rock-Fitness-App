@@ -164,13 +164,9 @@ Appointment description: ${message}
    return (
       <Container fluid style={{padding: "0px"}}>
          <Row>
-            <Col xs={2} style={{ backgroundColor: "black", maxWidth: "250px" }}>
-               <Row style={{ height: "100vh" }}>
-                  <SideNav />
-               </Row>
-            </Col>
-            <Col style={{padding: "0px"}}>
-               <div className="calendar" style={{margin: "0px"}}>
+            <SideNav />
+            <Col>
+               <div className="calendar">
                   <div>{header()}</div>
                   <div>{days()}</div>
                   <div>{cells()}</div>
