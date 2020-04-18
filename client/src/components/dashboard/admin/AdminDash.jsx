@@ -1,18 +1,24 @@
 import React, { Component } from "react";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Form from "react-bootstrap/Form";
-import { Button, CardDeck } from "react-bootstrap";
+import {
+  Container, Row, Col,
+  Form,
+  Button,
+  CardDeck, Card
+} from "react-bootstrap";
 import { connect } from "react-redux";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-import { getAllClients, createWorkout } from "../../../actions/admin.actions";
+import {
+  getAllClients,
+  createWorkout,
+  getPastWorkouts
+} from "../../../actions/admin.actions";
 import { logoutUser } from "../../../actions/user.actions";
 import CreateExerciseForm from "./CreateExerciseForm";
 import TempExerciseCard from "./TempExerciseCard";
 import SideNav from "../SideNav";
+import PrevWorkoutPanel from './PrevWorkoutPanel';
 
 class AdminDash extends Component {
   constructor(props) {
@@ -20,6 +26,7 @@ class AdminDash extends Component {
     this.state = {
       clients: [],
       selectedClient: {},
+      selectedClientPastWorkouts: [],
       workoutDate: new Date(),
       exercises: [],
       workoutCanBeSubmitted: false
@@ -49,6 +56,9 @@ class AdminDash extends Component {
         )
       ]
     });
+    this.setState({
+      selectedClientPastWorkouts: getPastWorkouts(this.state.selectedClient._id)
+    })
   }
   handleDateSelect(date) {
     this.setState({
@@ -81,51 +91,78 @@ class AdminDash extends Component {
   };
   render() {
     return (
-      <Container fluid  style={{padding: "0px"}}>
+      <Container fluid style={{ padding: "0px" }}>
         <Row>
-          <SideNav />
-          <Col>
-            <Form>
-              <Form.Row>
-                <Form.Group as={Col}>
-                  <Form.Label>Select Client</Form.Label>
-                  <Form.Control as="select" onChange={this.handleClientSelect}>
-                    {this.state.clients &&
-                      this.state.clients.map(client => {
-                        return <option>{client.name}</option>;
-                      })}
-                  </Form.Control>
-                </Form.Group>
-                <Form.Group as={Col}>
-                  <Form.Label>Workout Date</Form.Label>
-                  <DatePicker
-                    selected={this.state.workoutDate}
-                    onChange={this.handleDateSelect}
-                  />
-                </Form.Group>
-              </Form.Row>
-
-              <CreateExerciseForm createExercise={this.handleAddExercise} />
-            </Form>
-            <CardDeck>
-              {this.state.exercises.map(exercise => (
-                <TempExerciseCard
-                  exercise={exercise}
-                  onRemove={this.handleRemoveExercise}
-                />
-              ))}
-            </CardDeck>
-
-            <Button
-              onClick={this.handleWorkoutSubmit}
-              disabled={!this.state.exercises.length > 0}
-            >
-              Submit Workout
-            </Button>
+          <Col xs={2}>
+            <SideNav />
           </Col>
-          <Col></Col>
+          <Col>
+            <Row>
+              <Col>
+                <Card>
+                  <Card.Body>
+                    <Form>
+                      <Form.Row>
+                        <Form.Group as={Col}>
+                          <Form.Label>Select Client</Form.Label>
+                          <Form.Control as="select" onChange={this.handleClientSelect}>
+                            {this.state.clients &&
+                              this.state.clients.map(client => {
+                                return <option>{client.name}</option>;
+                              })}
+                          </Form.Control>
+                        </Form.Group>
+                        <Form.Group as={Col}>
+                          <Form.Label>Workout Date</Form.Label>
+                          <DatePicker
+                            selected={this.state.workoutDate}
+                            onChange={this.handleDateSelect}
+                          />
+                        </Form.Group>
+                      </Form.Row>
+                      <CreateExerciseForm createExercise={this.handleAddExercise} />
+                    </Form>
+                  </Card.Body>
+                </Card>
+              </Col>
+              <Col>
+                <PrevWorkoutPanel
+                  prevWorkouts={this.state.selectedClientPastWorkouts}
+                  onAddExercise={this.handleAddExercise} />
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <Card style={{ minHeight: '10rem' }}>
+                  {this.state.exercises.length > 0 ? (
+                    <CardDeck>
+                      {this.state.exercises.map(exercise => (
+                        <TempExerciseCard
+                          type=''
+                          exercise={exercise}
+                          onRemove={this.handleRemoveExercise}
+                        />
+                      ))}
+                    </CardDeck>
+                  ) : (
+                      <Card.Body
+                        className='text-center align-midde text-muted'
+                      >
+                        Exercises you add will apear here
+                      </Card.Body>
+                    )}
+                </Card>
+                <Button
+                  onClick={this.handleWorkoutSubmit}
+                  disabled={!this.state.exercises.length > 0}
+                >
+                  Submit Workout
+            </Button>
+              </Col>
+            </Row>
+          </Col>
         </Row>
-      </Container>
+      </Container >
     );
   }
 }

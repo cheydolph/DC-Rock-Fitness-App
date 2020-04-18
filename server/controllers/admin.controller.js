@@ -30,9 +30,19 @@ const getClients = function (req, res, next) {
     });
 };
 
+const getWorkouts = function (req, res, next) {
+    Workout
+        .find({ userId: req.params.userId })
+        .populate("exercises")
+        .exec((err, workouts) => {
+            res.status(200).json(workouts);
+        });
+};
+
 module.exports = {
     addExercise,
     assignWorkout,
     getExercises,
-    getClients
+    getClients,
+    getWorkouts
 };
