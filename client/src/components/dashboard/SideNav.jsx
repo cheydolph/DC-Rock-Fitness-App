@@ -52,7 +52,7 @@ class SideNav extends Component {
               </Nav.Link>
             </Nav.Item>
             <Nav.Item style={sideNavItemStyle}>
-              <Nav.Link>
+              <Nav.Link href="/nutrition">
                 <i className="material-icons">local_dining</i> Nutrition
               </Nav.Link>
             </Nav.Item>

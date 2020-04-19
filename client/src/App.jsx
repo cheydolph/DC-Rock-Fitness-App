@@ -15,6 +15,7 @@ import Calendar from "./components/calendar/Calendar";
 import About from "./components/about/About";
 import Payment from "./components/payment/Payment";
 import Resources from "./components/resources/Resources";
+import Nutrition from "./components/nutrition/Nutrition";
 import UserDash from "./components/dashboard/user/UserDash";
 import AdminDash from "./components/dashboard/admin/AdminDash";
 
@@ -51,6 +52,7 @@ class App extends Component {
             <Route exact path="/login" component={Login} />
             <Route exact path="/contact" component={About} />
             <Route exact path="/payment" component={Payment} />
+			<Route exact path="/nutrition" component={Nutrition} />
             <Route exact path="/resources" component={Resources} />
 
             <div className="Calendar">
