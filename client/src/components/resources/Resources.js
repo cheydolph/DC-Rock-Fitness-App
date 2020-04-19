@@ -17,7 +17,7 @@ class Resources extends React.Component {
 
   render() {
     return (
-      <Container fluid>
+      <Container fluid style={{padding: "0px"}}>
         <Row>
           <SideNav />
           <Col>

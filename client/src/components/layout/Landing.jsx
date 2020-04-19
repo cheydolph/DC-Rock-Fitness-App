@@ -5,7 +5,7 @@ import { Container, Row, Col } from "react-bootstrap";
 class Landing extends Component {
   render() {
     return (
-      <Container fluid>
+      <Container fluid style={{padding: "0px"}}>
         <Row>
           <SideNav />
           <Col className="text-center">

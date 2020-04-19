@@ -29,7 +29,7 @@ class UserDash extends Component {
   render() {
     const { user } = this.props.auth;
     return (
-      <Container fluid>
+      <Container fluid style={{padding: "0px"}}>
         <Row>
           <SideNav />
           <Col>

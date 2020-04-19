@@ -162,7 +162,7 @@ Appointment description: ${message}
    };
 
    return (
-      <Container fluid>
+      <Container fluid style={{padding: "0px"}}>
          <Row>
             <SideNav />
             <Col>
