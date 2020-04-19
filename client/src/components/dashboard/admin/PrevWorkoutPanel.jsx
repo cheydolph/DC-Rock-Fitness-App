@@ -1,53 +1,54 @@
 import React, { useState } from 'react';
+import moment from 'moment';
 import {
     Row, Col, Container,
     Card, CardColumns,
-    Nav
+    Nav,
+    ListGroup
 } from 'react-bootstrap';
 
-import PrevWorkoutList from './PrevWorkoutList';
+import DatePicker from "react-datepicker";
 import TempExerciseCard from './TempExerciseCard';
 
-const PrevWorkoutPanel = ({ prevWorkouts, onAddExercise }) => {
-    const selectedWorkout = useState({});
-    const setSelectedWorkout = workoutDate => {
-        selectedWorkout =
-            prevWorkouts[prevWorkouts.find(workout => workout.date == workoutDate)];
+const PrevWorkoutPanel = ({ name, prevWorkouts, onAddExercise }) => {
+    const [selectedWorkout, setSelectedWorkout] = useState({ exercises: [] });
+    const [pastWorkoutDate, setPastWorkoutDate] = useState(new Date());
+    const onDateSelect = (date) => {
+        setPastWorkoutDate(date);
+        let workout = prevWorkouts.find(workout => {
+            return moment(workout.date).format('YYYY-MM-DD') === moment(date).format('YYYY-MM-DD');
+        });
+        if (!workout) {
+            workout = { exercises: [] };
+        }
+        setSelectedWorkout(workout);
     };
     return (
-        <Card>
+        <Card style={{ margin: '2rem', height: '28rem' }}>
             <Card.Header>
-                <Nav variant='tabs' defaultActiveKey="#previous">
-                    <Nav.Item>
-                        <Nav.Link href="#previous">Past</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Nav.Link href='#frequent'>Frequent</Nav.Link>
-                    </Nav.Item>
-                </Nav>
+                {name}'s workout from:{' '}
+                <DatePicker
+                    selected={pastWorkoutDate}
+                    onChange={onDateSelect}
+                />
             </Card.Header>
-            <Card.Body>
-                <Container>
-                    <Row>
-                        <Col>
-                            <PrevWorkoutList
-                                workouts={prevWorkouts}
-                                selectWorkout={setSelectedWorkout}
+            <Card.Body
+                style={{
+                    overflowY: 'scroll'
+                }}>
+                {selectedWorkout &&
+                    selectedWorkout.exercises.length ?
+                    (<CardColumns>
+                        {selectedWorkout.exercises.map(item => (
+                            <TempExerciseCard
+                                type='prev'
+                                exercise={item}
+                                onAdd={onAddExercise}
                             />
-                        </Col>
-                        <Col>
-                            <CardColumns>
-                                {selectedWorkout && selectedWorkout.exercises.map(exercise => (
-                                    <TempExerciseCard
-                                        type='prev'
-                                        exercise={exercise}
-                                        onAdd={onAddExercise}
-                                    />
-                                ))}
-                            </CardColumns>
-                        </Col>
-                    </Row>
-                </Container>
+                        ))}
+                    </CardColumns>)
+                    : (<p className='text-muted'>{name} has no exercises on
+                        {' ' + moment(pastWorkoutDate).format('LL')}</p>)}
             </Card.Body>
         </Card>
     );

@@ -2,7 +2,7 @@ import React, { Component, useState } from "react";
 import { Card, Button } from "react-bootstrap";
 import { ListGroup } from "react-bootstrap";
 
-const ExerciseCard = ({ type, exercise, onRemove, onAdd }) => {
+const TempExerciseCard = ({ type, exercise, onRemove, onAdd }) => {
   const getVideoId = url => {
     // Thanks to mantish on StackOverflow
     var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
@@ -19,10 +19,25 @@ const ExerciseCard = ({ type, exercise, onRemove, onAdd }) => {
   const add = () => {
     onAdd(exercise);
   }
+  let button;
+  if (type === 'temp') {
+    button = (
+      <Button variant="danger" onClick={remove}>
+        Remove
+      </Button>
+    );
+  } else if (type === 'prev') {
+    button = (
+      <Button variant="danger" onClick={add}>
+        Add
+      </Button>
+    );
+  }
+
   return (
     <Card
       style={{
-        maxWidth: "15rem"
+        maxWidth: "12rem",
       }}
     >
       <Card.Img
@@ -39,20 +54,10 @@ const ExerciseCard = ({ type, exercise, onRemove, onAdd }) => {
           {exercise.name} x{exercise.reps}
         </Card.Title>
         <Card.Text>{exercise.notes}</Card.Text>
-        {type = 'temp' ? (
-          <Button variant="danger" onClick={remove}>
-            Remove
-          </Button>
-        ) : (
-            <Button variant="danger" onClick={add}>
-              Add
-            </Button>
-          )
-        }
-
       </Card.Body>
+      <Card.Footer className='text-center'>{button}</Card.Footer>
     </Card>
   );
 };
 
-export default ExerciseCard;
+export default TempExerciseCard;

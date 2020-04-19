@@ -3,7 +3,8 @@ import {
   Container, Row, Col,
   Form,
   Button,
-  CardDeck, Card
+  CardDeck, Card,
+  Nav
 } from "react-bootstrap";
 import { connect } from "react-redux";
 import DatePicker from "react-datepicker";
@@ -55,10 +56,10 @@ class AdminDash extends Component {
           client => client.name === event.target.value
         )
       ]
+    }, () => {
+      getPastWorkouts(this.state.selectedClient._id)
+        .then(data => this.setState({ selectedClientPastWorkouts: data }))
     });
-    this.setState({
-      selectedClientPastWorkouts: getPastWorkouts(this.state.selectedClient._id)
-    })
   }
   handleDateSelect(date) {
     this.setState({
@@ -91,7 +92,10 @@ class AdminDash extends Component {
   };
   render() {
     return (
-      <Container fluid style={{ padding: "0px" }}>
+      <Container fluid style={{
+        padding: "0px",
+        backgroundColor: 'lightgrey'
+      }}>
         <Row>
           <Col xs={2}>
             <SideNav />
@@ -99,8 +103,8 @@ class AdminDash extends Component {
           <Col>
             <Row>
               <Col>
-                <Card>
-                  <Card.Body>
+                <Card style={{ margin: "2rem" }}>
+                  <Card.Header>
                     <Form>
                       <Form.Row>
                         <Form.Group as={Col}>
@@ -120,44 +124,54 @@ class AdminDash extends Component {
                           />
                         </Form.Group>
                       </Form.Row>
-                      <CreateExerciseForm createExercise={this.handleAddExercise} />
                     </Form>
+                  </Card.Header>
+                  <Card.Body>
+                    <CreateExerciseForm createExercise={this.handleAddExercise} />
                   </Card.Body>
                 </Card>
               </Col>
               <Col>
                 <PrevWorkoutPanel
+                  name={this.state.selectedClient.name}
                   prevWorkouts={this.state.selectedClientPastWorkouts}
-                  onAddExercise={this.handleAddExercise} />
+                  onAddExercise={this.handleAddExercise}
+                />
               </Col>
             </Row>
             <Row>
               <Col>
-                <Card style={{ minHeight: '10rem' }}>
-                  {this.state.exercises.length > 0 ? (
-                    <CardDeck>
-                      {this.state.exercises.map(exercise => (
-                        <TempExerciseCard
-                          type=''
-                          exercise={exercise}
-                          onRemove={this.handleRemoveExercise}
-                        />
-                      ))}
-                    </CardDeck>
-                  ) : (
-                      <Card.Body
-                        className='text-center align-midde text-muted'
-                      >
-                        Exercises you add will apear here
-                      </Card.Body>
-                    )}
+                <Card style={{ minHeight: '23rem' }}>
+                  <Card.Body>
+                    {this.state.exercises.length > 0 ? (
+                      <CardDeck >
+                        {this.state.exercises.map(exercise => (
+                          <TempExerciseCard
+                            type='temp'
+                            exercise={exercise}
+                            onRemove={this.handleRemoveExercise}
+                          />
+                        ))}
+                      </CardDeck>
+                    ) : (
+                        <div
+                          className='text-center align-midde text-muted'
+                        >
+                          Exercises you add will apear here
+                        </div>
+                      )}
+                  </Card.Body>
+                  <Card.Footer
+                    className='text-center'
+                  >
+                    <Button
+                      onClick={this.handleWorkoutSubmit}
+                      disabled={!this.state.exercises.length > 0}
+                    >
+                      Submit Workout
+                    </Button>
+                  </Card.Footer>
                 </Card>
-                <Button
-                  onClick={this.handleWorkoutSubmit}
-                  disabled={!this.state.exercises.length > 0}
-                >
-                  Submit Workout
-            </Button>
               </Col>
             </Row>
           </Col>
