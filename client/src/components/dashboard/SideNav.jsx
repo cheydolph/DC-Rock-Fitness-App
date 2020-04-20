@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Row, Col, Nav, NavItem, Button } from "react-bootstrap";
 import { connect } from "react-redux";
+import {Link} from "react-router-dom";
 
 import logo from "../../assets/logo-full.svg";
 import { logoutUser } from "../../actions/user.actions";
@@ -37,6 +38,7 @@ class SideNav extends Component {
           >
             <Nav.Item>
               <Nav.Link>
+                <Link to="/">
                 <img
                   src={logo}
                   width="70%"
@@ -45,6 +47,7 @@ class SideNav extends Component {
                   alt="DC Rock Fitness Logo"
                   style={{ margin: '1rem' }}
                 />
+                </Link>
               </Nav.Link>
             </Nav.Item>
             <Nav.Item style={sideNavItemStyle}>

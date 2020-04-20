@@ -23,10 +23,11 @@ class About extends React.Component {
             <div>
 
               <body style={{}}>
-                <h1 style={{ fontSize: '60px', fontFamily: 'Lekton' }}>About Us</h1>
+                <h1 style={{ fontSize: '60px', fontFamily: 'Lekton', 'text-align':'center', 'margin-top': '3vw' }}>
+                  About Us</h1>
               </body >
               <br/>
-              <div style={{ marginLeft: '100px', width: 500, height: 'auto'}}>
+              <div style={{ marginLeft: '100px', width: 500, height: 'auto', }}>
                 <img src={profilePic} alt="" />
               </div>
               <div style={{ marginLeft: '100px', }}>

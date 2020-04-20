@@ -5,7 +5,7 @@ const VideoFilter = (props) => {
     return (
         <div className="form__group field" style={{marginTop: '1vw'}}>
             <input type="input" className="form__field" name="name" id='name' required
-                   placeholder='Filter by flower'
+                   placeholder='Filter by video'
                    aria-label='Video'
                    aria-describedby='search'
                    value={props.input}

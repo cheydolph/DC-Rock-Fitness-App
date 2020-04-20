@@ -12,7 +12,7 @@ import './styles/Nutrition.css';
 const Nutrition = (props) => { 
   const[input,setInput] = useState('');
     return (
-      <Container fluid>
+      <Container fluid style={{padding: "0px"}}>
         <Row>
           <SideNav />
           <Col>
