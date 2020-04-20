@@ -49,7 +49,8 @@ const Calendar = () => {
          alert("Please select an appointment time.");
       }
       else {
-         const date = (dateFns.format(selectedDate, "MM")).concat("/", dateFns.format(selectedDate, "dd"), "/", dateFns.format(selectedDate, "yyyy"));
+         //const date = (dateFns.format(selectedDate, "MM")).concat("-", dateFns.format(selectedDate, "dd"), "-", dateFns.format(selectedDate, "yyyy"));
+         const date = moment(selectedDate).format('MM-DD-YYYY');
          const dataToSubmit = {
             firstname, lastname, email, phonenumber, reason, code, timeslot, date
          };
@@ -150,7 +151,7 @@ const Calendar = () => {
 
    const onDateClick = day => {
       setSelectedDate(day);
-      const dateStr = moment(day).format('YYYY-MM-DD');
+      const dateStr = moment(day).format('MM-DD-YYYY');
       //const date = (dateFns.format(selectedDate, "MM")).concat("/", dateFns.format(selectedDate, "dd"), "/", dateFns.format(selectedDate, "yyyy"));
       //const dataToSubmit = {date};
       fetch("/users/calendar/:" + dateStr, {method: 'GET'})      

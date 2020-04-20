@@ -122,7 +122,7 @@ const sendAppointment = (req, res, next) => {
     } else {
       const newAppointment = new Appointment({
         email: req.body.email,
-        date: req.body.date,
+        date: new Date(req.body.date),
         time: req.body.timeslot
       });
       
@@ -133,6 +133,8 @@ const sendAppointment = (req, res, next) => {
 }
 
 const getAppointments = (req, res, next) => {  
+  console.log(req.params.date);
+  console.log(new Date(req.params.date));
   Appointment
   .find({date: new Date(req.params.date)})
   .exec((err, appointments) => {
