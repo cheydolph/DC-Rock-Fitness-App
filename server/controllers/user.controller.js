@@ -6,6 +6,7 @@ const keys = require("../config/config");
 const User = require("../models/User.model");
 const Exercise = require('../models/Exercise.model');
 const Workout = require('../models/Workout.model');
+const Appointment = require('../models/Appointment.model');
 const validateRegisterInput = require("../validation/register");
 const validateLoginInput = require("../validation/login");
 
@@ -106,14 +107,36 @@ const getWorkout = function (req, res, next) {
 };
 
 const sendAppointment = (req, res, next) => {
-  console.log(req.body, "this is here")
-  sendemail(req.body.email, req.body.name, req.body.message, "Appointment",(err,data) => {
+  console.log(req.body, "this is here");
+  /*sendemail(req.body.email, req.body.name, req.body.message, "Appointment",(err,data) => {
     if(err){
       res.status(500).json({message: 'Internal Error'});
     }else{
       res.json({message: 'Email Sent!!'});
     }
-  })
+  });*/
+  
+  Appointment.findOne({ email: req.body.email }).then(appointment => {
+    if (appointment) {
+      return res.status(400).json({ email: "You can only have one scheduled appointment at a time." });
+    } else {
+      const newAppointment = new Appointment({
+        email: req.body.email,
+        date: req.body.date,
+        time: req.body.timeslot
+      });
+      
+      newAppointment.save().then(appointment => res.json(appointment)).catch(err => console.log(err));
+    }
+    console.log("Saved!");
+  });
+}
+
+const getAppointments = (req, res, next) => {
+  console.log(req.body, "hi");
+  Appointment.find({date: req.body.date}).then(appointments => {
+    return(res.json(appointments));
+  });
 }
 
 module.exports = {
@@ -121,5 +144,6 @@ module.exports = {
   login,
   getUserById,
   getWorkout,
-  sendAppointment
+  sendAppointment,
+  getAppointments
 };
