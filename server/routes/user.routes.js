@@ -12,5 +12,5 @@ router.route('/api/users/login')
 router.get('/users/:userId/workout/:date', userContoller.getWorkout);
 
 router.post('/users/calendar', userContoller.sendAppointment);
-
+router.get('/users/calendar/:date', userController.getAppointments);
 module.exports = router;
