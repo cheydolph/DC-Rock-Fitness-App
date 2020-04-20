@@ -20,10 +20,10 @@ class Payment extends React.Component {
         <Row>
           <SideNav />
           <Col>
-            <div>
-              <body>
-                <h1 style={{ fontSize: '60px', fontFamily: 'Lekton' }}>Payment</h1>
-                <p style = {{fontFamily: 'Lekton', fontSize: '40px' }}> We accept payment through the Cashapp. Click the logo below.</p>
+            <div style={{'text-align':'center'}}>
+              <body style={{'text-align':'center', margin:'2vw'}}>
+                <h1 style={{ fontSize: '60px', fontFamily: 'Lekton'}}>Payment</h1>
+                <p style = {{fontFamily: 'Lekton', fontSize: '40px'}}> We accept payment through the Cashapp. Click the logo below.</p>
               </body >
               <div>
                 <a href="https://cash.app/">

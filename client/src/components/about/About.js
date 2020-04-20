@@ -22,7 +22,7 @@ class About extends React.Component {
           <Col>
             <div>
               <body style={{}}>
-                <h1 style={{ fontSize: '60px', fontFamily: 'Lekton', 'text-align':'center', 'margin-top': '3vw' }}>
+                <h1 style={{ fontSize: '60px', fontFamily: 'Lekton', 'text-align':'center', 'margin-top': '2vw' }}>
                   About Us</h1>
               </body >
               <br/>
@@ -30,9 +30,9 @@ class About extends React.Component {
                 <img src={profilePic} alt="" />
               </div>
               <div>
-                <h1 style={{ fontFamily: 'Lekton', fontSize: '40px', 'text-align':'center', 'margin-top': '1vw', 'margin-bottom': '1vw' }}>First Name Last Name</h1>
-                <p style={{ fontFamily: 'Lekton', fontSize: '20px', 'text-align':'center', 'margin-top': '1vw' }}> DC Fitness LLC is a private fitness training company. We offer our customers plenty of benefits to give them a leg up on the competition.</p>                <br />
-                <p style={{ fontFamily: 'Lekton', fontSize: '20px', 'text-align':'center'}}> If you are interested in a private consulatation please request an appointment in the Calendar page.</p>
+                <h1 style={{ fontFamily: 'Lekton', fontSize: '35px', 'text-align':'center', 'margin-top': '1vw', 'margin-bottom': '1vw' }}>First Name Last Name</h1>
+                <p style={{ fontFamily: 'Lekton', fontSize: '18px', 'text-align':'center', 'margin-top': '1vw' }}> DC Fitness LLC is a private fitness training company. We offer our customers plenty of benefits to give them a leg up on the competition.</p>                <br />
+                <p style={{ fontFamily: 'Lekton', fontSize: '18px', 'text-align':'center'}}> If you are interested in a private consulatation please request an appointment in the Calendar page.</p>
               </div>
               <br />
               <div>

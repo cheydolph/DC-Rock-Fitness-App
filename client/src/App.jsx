@@ -52,7 +52,7 @@ class App extends Component {
             <Route exact path="/login" component={Login} />
             <Route exact path="/contact" component={About} />
             <Route exact path="/payment" component={Payment} />
-			<Route exact path="/nutrition" component={Nutrition} />
+			      <Route exact path="/nutrition" component={Nutrition} />
             <Route exact path="/resources" component={Resources} />
 
             <div className="Calendar">
