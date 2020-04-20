@@ -29,3 +29,13 @@ export async function createWorkout(workout) {
         });
 
 }
+
+export async function getPastWorkouts(id) {
+    return fetch('/admin/workouts/' + id, { method: 'GET' })
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => {
+            console.log(err);
+        });
+};

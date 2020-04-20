@@ -31,18 +31,19 @@ class SideNav extends Component {
           <Nav
             className="flex-column"
             style={{
-              fontSize: "2rem",
-              paddingTop: "3rem"
+              fontSize: "1.5rem",
+              paddingTop: "0rem"
             }}
           >
             <Nav.Item>
               <Nav.Link>
                 <img
                   src={logo}
-                  width="150rem"
-                  height="150rem"
+                  width="70%"
+                  height="70%"
                   className="d-inline-block align-top"
                   alt="DC Rock Fitness Logo"
+                  style={{ margin: '1rem' }}
                 />
               </Nav.Link>
             </Nav.Item>
@@ -76,7 +77,7 @@ class SideNav extends Component {
                 <i className="material-icons">email</i> Contact
               </Nav.Link>
             </Nav.Item>
-            <Nav.Item style={sideNavItemStyle}>
+            <Nav.Item style={sideNavItemStyle} className='text-center'>
               <Button onClick={this.onLogoutClick}>Logout</Button>
             </Nav.Item>
           </Nav>
