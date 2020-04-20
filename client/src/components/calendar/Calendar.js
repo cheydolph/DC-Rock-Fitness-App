@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import * as dateFns from "date-fns";
+import moment from 'moment';
 
 import SideNav from "../dashboard/SideNav";
 import calendarStyles from "./Calendar.css";
-import axios from "axios"
+import axios from "axios";
 
 import Popup from "reactjs-popup";
 
@@ -149,12 +150,11 @@ const Calendar = () => {
 
    const onDateClick = day => {
       setSelectedDate(day);
-
-      const date = (dateFns.format(selectedDate, "MM")).concat("/", dateFns.format(selectedDate, "dd"), "/", dateFns.format(selectedDate, "yyyy"));
-      const dataToSubmit = {date};
-      axios
-      .get("/users/calendar", dataToSubmit)
-      .then((res) => console.log('appointments', res.data))
+      const dateStr = moment(day).format('YYYY-MM-DD');
+      //const date = (dateFns.format(selectedDate, "MM")).concat("/", dateFns.format(selectedDate, "dd"), "/", dateFns.format(selectedDate, "yyyy"));
+      //const dataToSubmit = {date};
+      fetch("/users/calendar/:" + dateStr, {method: 'GET'})      
+      .then(res => console.log('appointments', res.data))
       .catch(err => {
          console.error(err);
       });

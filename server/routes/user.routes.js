@@ -1,16 +1,16 @@
 const express = require('express'); 
-const userContoller = require('../controllers/user.controller');
+const userController = require('../controllers/user.controller');
 
 const router = express.Router();
 
 router.route('/api/users/register')
-  .post(userContoller.register);
+  .post(userController.register);
 
 router.route('/api/users/login')
-  .post(userContoller.login);
+  .post(userController.login);
 
-router.get('/users/:userId/workout/:date', userContoller.getWorkout);
+router.get('/users/:userId/workout/:date', userController.getWorkout);
 
-router.post('/users/calendar', userContoller.sendAppointment);
+router.post('/users/calendar', userController.sendAppointment);
 router.get('/users/calendar/:date', userController.getAppointments);
 module.exports = router;

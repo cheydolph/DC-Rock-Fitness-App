@@ -132,10 +132,14 @@ const sendAppointment = (req, res, next) => {
   });
 }
 
-const getAppointments = (req, res, next) => {
-  console.log(req.body, "hi");
-  Appointment.find({date: req.body.date}).then(appointments => {
-    return(res.json(appointments));
+const getAppointments = (req, res, next) => {  
+  Appointment
+  .find({date: new Date(req.params.date)})
+  .exec((err, appointments) => {
+    if (err) {
+      console.log(err);
+    }
+    res.status(200).json(appointments);
   });
 }
 
