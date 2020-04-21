@@ -12,6 +12,7 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Calendar from "./components/calendar/Calendar";
+import AdminCalendar from "./components/calendar/AdminCalendar";
 import About from "./components/about/About";
 import Payment from "./components/payment/Payment";
 import Resources from "./components/resources/Resources";
@@ -55,9 +56,9 @@ class App extends Component {
 			      <Route exact path="/nutrition" component={Nutrition} />
             <Route exact path="/resources" component={Resources} />
 
-            <div className="Calendar">
-              <Route exact path="/Calendar" component={Calendar} />
-            </div>
+            <Switch>
+              <PrivateRoute exact path="/Calendar" userComponent={Calendar} adminComponent = {AdminCalendar}/>
+            </Switch>
             <Switch>
               <PrivateRoute
                 exact

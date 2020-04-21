@@ -132,7 +132,12 @@ const sendAppointment = (req, res, next) => {
       return res.status(400).json({ email: "You can only have one scheduled appointment at a time." });
     } else {
       const newAppointment = new Appointment({
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
         email: req.body.email,
+        phonenumber: req.body.phonenumber,
+        reason: req.body.reason,
+        code: req.body.code,
         date: new Date(req.body.date),
         time: req.body.timeslot
       });
@@ -156,11 +161,23 @@ const getAppointments = (req, res, next) => {
   });
 }
 
+const getAppointmentAdmin = (req, res, next) => {  
+  Appointment
+  .findOne({'time': req.params.time, 'date': new Date(req.params.date)})
+  .exec((err, appointments) => {
+    if (err) {
+      console.log(err);
+    }
+    res.status(200).json(appointments);
+  });
+}
+
 module.exports = {
   register,
   login,
   getUserById,
   getWorkout,
   sendAppointment,
-  getAppointments
+  getAppointments,
+  getAppointmentAdmin
 };

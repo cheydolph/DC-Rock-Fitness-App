@@ -217,6 +217,15 @@ header {
 .form .hours .entry:focus {
   background: dodgerblue;
 }
+.form .hours .reserved {
+  background: indianred;
+}
+.form .hours .reserved:focus {
+  background: indianred;
+}
+.form .hours .reserved:hover {
+  background: indianred
+}
 .form .hours .entry .text {
   position: relative;
   text-align: center;

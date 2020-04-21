@@ -13,4 +13,6 @@ router.get('/users/:userId/workout/:date', userController.getWorkout);
 
 router.post('/users/calendar', userController.sendAppointment);
 router.get('/users/calendar/:date', userController.getAppointments);
+
+router.get("/admin/calendar/:time:date", userController.getAppointmentAdmin);
 module.exports = router;
