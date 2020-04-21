@@ -29,11 +29,11 @@ const Calendar = () => {
          setFirstname(e.target.value);
       } else if (e.target.id === "lastname") {
          setLastname(e.target.value);
-      } else if (e.target.id == "email") {
+      } else if (e.target.id === "email") {
          setEmail(e.target.value);
-      } else if (e.target.id == "phonenumber") {
+      } else if (e.target.id === "phonenumber") {
          setPhonenumber(e.target.value);
-      } else if (e.target.id == "reason") {
+      } else if (e.target.id === "reason") {
          setReason(e.target.value);
       } else {
          setCode(e.target.value);
@@ -154,7 +154,7 @@ const Calendar = () => {
       const dateStr = moment(day).format('MM-DD-YYYY');
       //const date = (dateFns.format(selectedDate, "MM")).concat("/", dateFns.format(selectedDate, "dd"), "/", dateFns.format(selectedDate, "yyyy"));
       //const dataToSubmit = {date};
-      fetch("/users/calendar/:" + dateStr, {method: 'GET'})      
+      fetch("/users/calendar/:" + dateStr, {method: 'GET'})    
       .then(res => console.log('appointments', res.data))
       .catch(err => {
          console.error(err);
@@ -167,15 +167,15 @@ const Calendar = () => {
          setTimeslot("9:00am - 10:00am");
       } else if (e.target.id === "10") {
          setTimeslot("10:00am - 11:00am");
-      } else if (e.target.id == "11") {
+      } else if (e.target.id === "11") {
          setTimeslot("11:00am - 12:00pm");
-      } else if (e.target.id == "12") {
+      } else if (e.target.id === "12") {
          setTimeslot("12:00pm - 1:00pm");
-      } else if (e.target.id == "1") {
+      } else if (e.target.id === "1") {
          setTimeslot("1:00pm - 2:00pm");
-      } else if (e.target.id == "2") {
+      } else if (e.target.id === "2") {
          setTimeslot("2:00pm - 3:00pm");
-      } else if (e.target.id == "3") {
+      } else if (e.target.id === "3") {
          setTimeslot("3:00pm - 4:00pm");
       } else {
          setTimeslot("4:00pm - 5:00pm");
