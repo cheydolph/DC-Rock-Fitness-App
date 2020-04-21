@@ -108,13 +108,25 @@ const getWorkout = function (req, res, next) {
 
 const sendAppointment = (req, res, next) => {
   console.log(req.body, "this is here");
-  /*sendemail(req.body.email, req.body.name, req.body.message, "Appointment",(err,data) => {
-    if(err){
-      res.status(500).json({message: 'Internal Error'});
-    }else{
-      res.json({message: 'Email Sent!!'});
-    }
-  });*/
+  let message = `Appoinment Reminder  with ${req.body.firstname} ${req.body.lastname} at ${req.body.timeslot} on ${req.body.date}.`
+  let ReminderMessage = `Appoinment Confirmation at ${req.body.timeslot} on ${req.body.date}`;
+  let name = `${req.body.firstname} ${req.body.lastname}`;
+  // sendemail(req.body.email, name, ReminderMessage, "Appointment",(err,data) => {
+  //   if(err){
+  //     res.status(500).json({message: 'Internal Error'});
+  //   }else{
+  //     res.json({message: 'Email Sent!!'});
+  //     console.log("Email Sent");
+  //   }
+  // });
+  // sendemail(req.body.email, name, message, "ClientReminder",(err,data) => {
+  //   if(err){
+  //     res.status(500).json({message: 'Internal Error'});
+  //   }else{
+  //     res.json({message: 'Email Sent!!'});
+  //   }
+  // });
+  
   
   Appointment.findOne({ email: req.body.email }).then(appointment => {
     if (appointment) {
