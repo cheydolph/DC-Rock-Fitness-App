@@ -6,6 +6,7 @@ const keys = require("../config/config");
 const User = require("../models/User.model");
 const Exercise = require('../models/Exercise.model');
 const Workout = require('../models/Workout.model');
+const Appointment = require('../models/Appointment.model');
 const validateRegisterInput = require("../validation/register");
 const validateLoginInput = require("../validation/login");
 
@@ -106,14 +107,69 @@ const getWorkout = function (req, res, next) {
 };
 
 const sendAppointment = (req, res, next) => {
-  console.log(req.body, "this is here")
-  sendemail(req.body.email, req.body.name, req.body.message, "Appointment",(err,data) => {
+  console.log(req.body, "this is here");
+  let ReminderMessage = `Appoinment Confirmation about ${req.body.reason} with DC Rock Fitness at ${req.body.timeslot} on ${req.body.date}.`;
+  let name = `${req.body.firstname} ${req.body.lastname}`;
+  sendemail(req.body.email, name, ReminderMessage, "Appointment",(err,data) => {
     if(err){
       res.status(500).json({message: 'Internal Error'});
     }else{
       res.json({message: 'Email Sent!!'});
+      console.log("Email Sent");
     }
-  })
+  });
+  // sendemail(req.body.email, name, message, "ClientReminder",(err,data) => {
+  //   if(err){
+  //     res.status(500).json({message: 'Internal Error'});
+  //   }else{
+  //     res.json({message: 'Email Sent!!'});
+  //   }
+  // });
+  
+  
+  Appointment.findOne({ email: req.body.email }).then(appointment => {
+    if (appointment) {
+      return res.status(400).json({ email: "You can only have one scheduled appointment at a time." });
+    } else {
+      const newAppointment = new Appointment({
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        email: req.body.email,
+        phonenumber: req.body.phonenumber,
+        reason: req.body.reason,
+        code: req.body.code,
+        date: new Date(req.body.date),
+        time: req.body.timeslot
+      });
+      
+      newAppointment.save().then(appointment => res.json(appointment)).catch(err => console.log(err));
+    }
+    console.log("Saved!");
+  });
+}
+
+const getAppointments = (req, res, next) => {  
+  console.log(req.params.date);
+  console.log(new Date(req.params.date));
+  Appointment
+  .find({date: new Date(req.params.date)})
+  .exec((err, appointments) => {
+    if (err) {
+      console.log(err);
+    }
+    res.status(200).json(appointments);
+  });
+}
+
+const getAppointmentAdmin = (req, res, next) => {  
+  Appointment
+  .findOne({'time': req.params.time, 'date': new Date(req.params.date)})
+  .exec((err, appointments) => {
+    if (err) {
+      console.log(err);
+    }
+    res.status(200).json(appointments);
+  });
 }
 
 module.exports = {
@@ -121,5 +177,7 @@ module.exports = {
   login,
   getUserById,
   getWorkout,
-  sendAppointment
+  sendAppointment,
+  getAppointments,
+  getAppointmentAdmin
 };

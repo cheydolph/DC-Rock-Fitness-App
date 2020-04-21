@@ -17,13 +17,13 @@ class Resources extends React.Component {
 
   render() {
     return (
-      <Container fluid>
+      <Container fluid style={{padding: "0px"}}>
         <Row>
           <SideNav />
           <Col>
             <div>
               <body style={{}}>
-                <h1 style={{ fontSize: '60px', fontFamily: 'Lekton' }}> Resources</h1>
+                <h1 style={{ fontSize: '60px', fontFamily: 'Lekton','text-align':'center', 'margin-top': '2vw' }}> Resources</h1>
                 <ResourceCard></ResourceCard>
               </body >
             </div>

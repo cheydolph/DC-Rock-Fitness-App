@@ -2,6 +2,7 @@ const Exercise = require("../models/Exercise.model");
 const User = require("../models/User.model");
 const Workout = require("../models/Workout.model");
 const mongoose = require("mongoose");
+const Appointment = require("../models/Appointment.model");
 
 const addExercise = (req, res, next) => {
     Exercise.create(req.body, (err, exercise) => {
@@ -30,9 +31,31 @@ const getClients = function (req, res, next) {
     });
 };
 
+const getWorkouts = function (req, res, next) {
+    Workout
+        .find({ userId: req.params.userId })
+        .populate("exercises")
+        .exec((err, workouts) => {
+            res.status(200).json(workouts);
+        });
+};
+
+const getAppointment = (req, res, next) => {  
+    Appointment
+    .findOne({'time': req.params.time, 'date': new Date(req.params.date)})
+    .exec((err, appointments) => {
+      if (err) {
+        console.log(err);
+      }
+      res.status(200).json(appointments);
+    });
+}
+
 module.exports = {
     addExercise,
     assignWorkout,
     getExercises,
-    getClients
+    getClients,
+    getWorkouts,
+    getAppointment
 };

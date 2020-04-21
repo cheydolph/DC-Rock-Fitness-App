@@ -5,15 +5,15 @@ import { Container, Row, Col } from "react-bootstrap";
 class Landing extends Component {
   render() {
     return (
-      <Container fluid>
+      <Container fluid style={{padding: "0px"}}>
         <Row>
           <SideNav />
           <Col className="text-center">
             <div>
-              <h1>Welcome to DC Rock Fitness</h1>
+              <h1 style={{fontSize: '60px', 'margin-top':'3vw'}}>Welcome to DC Rock Fitness</h1>
               <br />
               <div
-                style={{ fontFamily: "Lekton", fontSize: "40px" }}
+                style={{ fontFamily: "Lekton", fontSize: "50px" }}
                 className="container valign-wrapper"
               >
                 <div className="row">
@@ -31,11 +31,14 @@ class Landing extends Component {
                   style={{
                     width: "140px",
                     borderRadius: "3px",
-                    letterSpacing: "1.5px"
+                    letterSpacing: "1.5px",
+                    margin: "30px",
+                    backgroundColor: '#ED143D'
                   }}
-                  className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                  button type = "button"
+                  className="btn btn-primary btn-lg waves-effect waves-light"
                 >
-                  Register
+                    Register
                 </Link>
               </div>
               <div className="col s6">
@@ -44,9 +47,11 @@ class Landing extends Component {
                   style={{
                     width: "140px",
                     borderRadius: "3px",
-                    letterSpacing: "1.5px"
+                    letterSpacing: "1.5px",
+                    backgroundColor: '#ED143D'
                   }}
-                  className="btn btn-large btn-flat waves-effect white black-text"
+                  button type = "button"
+                  className="btn btn-primary btn-lg btn-flat waves-effect white black-text"
                 >
                   Log In
                 </Link>

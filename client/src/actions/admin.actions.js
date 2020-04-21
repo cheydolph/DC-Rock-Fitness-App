@@ -16,10 +16,13 @@ export async function createWorkout(workout) {
     // TODO: Make this nicer with insertMany()
     var exerciseIds = [];
     for (let exercise of workout.exercises) {
-        let result = await axios.post("/admin/exercise", exercise)
-        exerciseIds.push(result.data._id);
+        if (exercise.hasOwnProperty('isPast')) {
+            exerciseIds.push(exercise._id);
+        } else {
+            let result = await axios.post("/admin/exercise", exercise)
+            exerciseIds.push(result.data._id);
+        }
     }
-
     workout.date = moment(workout.date).format("YYYY-MM-DD");
     workout.exercises = exerciseIds;
     axios
@@ -29,3 +32,13 @@ export async function createWorkout(workout) {
         });
 
 }
+
+export async function getPastWorkouts(id) {
+    return fetch('/admin/workouts/' + id, { method: 'GET' })
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => {
+            console.log(err);
+        });
+};

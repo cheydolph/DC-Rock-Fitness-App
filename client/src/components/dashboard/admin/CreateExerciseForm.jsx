@@ -73,7 +73,7 @@ class CreateExerciseForm extends Component {
           <Form.Label>Notes</Form.Label>
           <Form.Control
             as="textarea"
-            rows="3"
+            rows="1"
             placeholder="Give users specific instructions here"
             name="notes"
             onChange={this.handleChange}

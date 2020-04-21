@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Row, Col, Nav, NavItem, Button } from "react-bootstrap";
 import { connect } from "react-redux";
+import {Link} from "react-router-dom";
 
 import logo from "../../assets/logo-full.svg";
 import { logoutUser } from "../../actions/user.actions";
@@ -16,7 +17,7 @@ class SideNav extends Component {
     };
     return (
       <Col
-        xs={4}
+        xs={2}
         style={{
           backgroundColor: "black",
           maxWidth: "400px"
@@ -31,19 +32,22 @@ class SideNav extends Component {
           <Nav
             className="flex-column"
             style={{
-              fontSize: "2rem",
-              paddingTop: "3rem"
+              fontSize: "1.5rem",
+              paddingTop: "0rem"
             }}
           >
             <Nav.Item>
               <Nav.Link>
+                <Link to="/">
                 <img
                   src={logo}
-                  width="150rem"
-                  height="150rem"
+                  width="70%"
+                  height="70%"
                   className="d-inline-block align-top"
                   alt="DC Rock Fitness Logo"
+                  style={{ margin: '1rem' }}
                 />
+                </Link>
               </Nav.Link>
             </Nav.Item>
             <Nav.Item style={sideNavItemStyle}>
@@ -52,7 +56,7 @@ class SideNav extends Component {
               </Nav.Link>
             </Nav.Item>
             <Nav.Item style={sideNavItemStyle}>
-              <Nav.Link>
+              <Nav.Link href="/Nutrition">
                 <i className="material-icons">local_dining</i> Nutrition
               </Nav.Link>
             </Nav.Item>
@@ -76,7 +80,7 @@ class SideNav extends Component {
                 <i className="material-icons">email</i> Contact
               </Nav.Link>
             </Nav.Item>
-            <Nav.Item style={sideNavItemStyle}>
+            <Nav.Item style={sideNavItemStyle} className='text-center'>
               <Button onClick={this.onLogoutClick}>Logout</Button>
             </Nav.Item>
           </Nav>

@@ -12,6 +12,8 @@ router.get("/admin/exercises", adminController.getExercises);
 
 router.get("/admin/clients", adminController.getClients);
 
+router.get("/admin/workouts/:userId", adminController.getWorkouts);
+
 //router.param('userId', userController.userById);
 
 module.exports = router;
