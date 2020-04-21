@@ -96,10 +96,8 @@ class AdminDash extends Component {
         padding: "0px",
         backgroundColor: 'lightgrey'
       }}>
-        <Row>
-          <Col xs={2}>
-            <SideNav />
-          </Col>
+        <Row>          
+            <SideNav />          
           <Col>
             <Row>
               <Col>

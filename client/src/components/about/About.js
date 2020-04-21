@@ -18,7 +18,9 @@ class About extends React.Component {
     return (
       <Container fluid style={{padding: "0px"}}>
         <Row>
-          <SideNav />
+          <Col>
+            <SideNav />
+          </Col>
           <Col>
             <div>
               <body style={{}}>

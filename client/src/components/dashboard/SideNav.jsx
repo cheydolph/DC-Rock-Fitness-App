@@ -17,7 +17,7 @@ class SideNav extends Component {
     };
     return (
       <Col
-        xs={4}
+        xs={2}
         style={{
           backgroundColor: "black",
           maxWidth: "400px"

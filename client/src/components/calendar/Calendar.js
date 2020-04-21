@@ -231,10 +231,8 @@ const Calendar = () => {
    return (
       <div style = {{padding: "0px"}}>
          <Container fluid style = {{padding: "0px"}}>
-            <Row style = {{margin: "0px", padding: "0px", width: "100%"}}>
-              <Col style = {{padding: "0px", maxWidth: "400px"}}>
-                  <SideNav />
-              </Col>
+            <Row>              
+                <SideNav />              
               <Col>
                   <Row style = {{margin: "0px", padding: "0px"}}>
                      <Col style = {{padding: "0px"}}>
