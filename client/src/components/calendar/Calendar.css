@@ -74,6 +74,8 @@ header {
   margin-left: 0px;
   background: linear-gradient(45deg, #e67676 4%, #f0ebeb 40%);
   /* background: linear-gradient(45deg, #ed143d 0%, #d14550 40%); */
+  /* background: linear-gradient(45deg, crimson 4%, rgb(252, 114, 114) 40%); */
+  /* background: linear-gradient(45deg, #ed143d 0%, #d14550 40%); */
   /* background: linear-gradient(45deg, #ff891a 0%, #ffe346 40%); */
 }
 .calendar .header .icon {
@@ -118,8 +120,9 @@ header {
 }
 .calendar .body .selected {
   border-left: 10px solid transparent;
-  /* border-image: linear-gradient(45deg, #005ce6 0%, #68a8f1 30%); */
-  border-image: linear-gradient(45deg, #ed143d 0%, #d14550 40%);
+  border-image: linear-gradient(45deg, #005ce6 0%, #68a8f1 30%);
+  /* border-image: linear-gradient(45deg, #ed143d 0%, #d14550 40%); */
+  /* border-image: linear-gradient(45deg, dodgerblue 0%, dodgerblue 30%); */
   border-image-slice: 1;
 }
 .calendar .body .row {
@@ -151,8 +154,9 @@ header {
 .calendar .body .cell .bg {
   font-weight: 700;
   line-height: 1;
+  color: dodgerblue;
   /* color: #1abeff; */
-  color: #ff481a;
+  /* color: #ff481a; */
   opacity: 0;
   font-size: 5em;
   position: absolute;
@@ -188,7 +192,8 @@ header {
   font-size: 150%;
   padding: 1.5em 0;
   border-bottom: 1px solid black;
-  background: linear-gradient(45deg, #ed143d 0%, #d14550 40%);
+  background: linear-gradient(45deg, #e67676 4%, #f0ebeb 40%);
+  /* background: linear-gradient(45deg, #ed143d 0%, #d14550 40%); */
   /* background: linear-gradient(45deg, #ff891a 0%, #ffe346 40%); */
 
   width: 100%;
@@ -211,6 +216,15 @@ header {
 }
 .form .hours .entry:focus {
   background: dodgerblue;
+}
+.form .hours .reserved {
+  background: indianred;
+}
+.form .hours .reserved:focus {
+  background: indianred;
+}
+.form .hours .reserved:hover {
+  background: indianred
 }
 .form .hours .entry .text {
   position: relative;

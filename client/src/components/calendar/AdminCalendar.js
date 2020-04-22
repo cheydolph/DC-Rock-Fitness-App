@@ -10,7 +10,7 @@ import axios from "axios";
 import Popup from "reactjs-popup";
 
 
-const Calendar = () => {
+const AdminCalendar = () => {
    const [currentMonth, setCurrentMonth] = useState(new Date());
    const [selectedDate, setSelectedDate] = useState(new Date());
    const [firstname, setFirstname] = useState('');
@@ -130,7 +130,7 @@ const Calendar = () => {
             const cloneDay = day;
             days.push(
                <div
-                  className={`column cell ${!dateFns.isSameMonth(day, monthStart) || dateFns.compareAsc(day, dateFns.subDays(today, 1)) === -1
+                  className={`column cell ${!dateFns.isSameMonth(day, monthStart) 
                      ? "disabled" : dateFns.isSameDay(day, selectedDate)
                         ? "selected" : ""}`}
                   key={day}
@@ -204,6 +204,16 @@ const Calendar = () => {
       });
    };
 
+
+   const setInfo = (hour) => {
+    setFirstname(hour.firstname);
+    setLastname(hour.lastname);
+    setEmail(hour.email);
+    setPhonenumber(hour.phonenumber);
+    setReason(hour.reason);
+    setCode(hour.code);
+   }
+
    const handleTimeClick = (e) => {
       e.preventDefault();
       if (e.target.id === "9") {
@@ -223,6 +233,31 @@ const Calendar = () => {
       } else {
          setTimeslot("4:00pm - 5:00pm");
       }
+
+      const dateStr = moment(selectedDate).format('MM-DD-YYYY');
+      if (timeslot === "9:00am - 10:00am" && reserved9 === true) {
+          console.log("hi");
+        fetch("/users/calendar/" + timeslot + "/" + dateStr, {method: 'GET'})      
+        .then(res => res.json())
+        .then(data => setInfo(data))
+        .catch(err => {
+         console.error(err);
+     });
+    } else if (timeslot === "10:00am - 11:00am") {
+         setReserved10(true);
+    } else if (timeslot === "11:00am - 12:00pm") {
+         setReserved11(true);
+    } else if (timeslot === "12:00pm - 1:00pm") {
+         setReserved12(true);
+    } else if (timeslot === "1:00pm - 2:00pm") {
+         setReserved1(true);
+    } else if (timeslot === "2:00pm - 3:00pm") {
+         setReserved2(true);
+    } else if (timeslot === "3:00pm - 4:00pm") {
+         setReserved3(true);
+    } else if (timeslot === "4:00pm - 5:00pm") {
+         setReserved4(true);
+    }
    }
 
    const hoursList = () => {
@@ -239,36 +274,35 @@ const Calendar = () => {
    };
 
    const questionnaire = () => {
-      return (
-         <div className = "wrapper">
-         <div style = {{marginTop: "20px"}}><font color = "white">Select an appointment time and complete the form below.</font></div>
-         <div className = "input" style = {{float: "left", marginLeft: "50px"}}>
-            <input type="text" placeholder="Firstname" id = "firstname" value = {firstname} onChange = {handleClick}/>
-            <span class="underline-animation"></span>
-         </div>
-         <div className = "input" style = {{float: "right", marginRight: "50px"}}>
-            <input type="text" placeholder="Lastname" id = "lastname" value = {lastname} onChange = {handleClick}/>
-            <span class="underline-animation"></span>
-         </div><br />
-         <div className = "input" style = {{float: "left", marginLeft: "50px"}}>
-            <input type="text" placeholder="Email" id = "email" value = {email} onChange = {handleClick}/>
-            <span class="underline-animation"></span>
-         </div>
-         <div className = "input" style = {{float: "right", marginRight: "50px"}}>
-            <input type="text" placeholder="Phone number" id = "phonenumber" value = {phonenumber} onChange = {handleClick}/>
-            <span class="underline-animation"></span>
-         </div><br />
-         <div className = "input" style = {{float: "left", marginLeft: "50px"}}>
-            <input type="text" placeholder="Reason for appointment" id = "reason" value = {reason} onChange = {handleClick}/>
-            <span class="underline-animation"></span>
-         </div>
-         <div className = "input" style = {{float: "right", marginRight: "50px"}}>
-            <input type="text" placeholder="Verification code" id = "code" value = {code} onChange = {handleClick}/>
-            <span class="underline-animation"></span>
-         </div><br />
-         <div><Button style = {{marginTop: "40px"}} onClick = {handleSubmit}>Reserve Appointment</Button></div>
-      </div>
-      );
+    return (
+        <div className = "wrapper">
+        <div style = {{marginTop: "20px"}}><font color = "white">Appointment Info.</font></div>
+        <div style = {{float: "left", marginLeft: "50px"}}>
+           {firstname}
+           <span class="underline-animation"></span>
+        </div>
+        <div style = {{float: "right", marginLeft: "50px"}}>
+           {lastname}
+           <span class="underline-animation"></span>
+        </div><br />
+        <div style = {{float: "left", marginLeft: "50px"}}>
+           {email}
+           <span class="underline-animation"></span>
+        </div>
+        <div style = {{float: "right", marginLeft: "50px"}}>
+           {phonenumber}
+           <span class="underline-animation"></span>
+        </div><br />
+        <div style = {{float: "left", marginLeft: "50px"}}>
+           {reason}
+           <span class="underline-animation"></span>
+        </div>
+        <div style = {{float: "right", marginLeft: "50px"}}>
+           {code}
+           <span class="underline-animation"></span>
+        </div><br />
+     </div>
+     );
    }
 
    return (
@@ -314,4 +348,4 @@ const Calendar = () => {
       </div>
    );
 };
-export default Calendar;
+export default AdminCalendar;

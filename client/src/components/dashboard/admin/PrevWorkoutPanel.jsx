@@ -23,6 +23,10 @@ const PrevWorkoutPanel = ({ name, prevWorkouts, onAddExercise }) => {
         }
         setSelectedWorkout(workout);
     };
+    const onAddPastExercise = (exercise) => {
+        exercise = { ...exercise, isPast: true };
+        onAddExercise(exercise);
+    }
     return (
         <Card style={{ margin: '2rem', height: '28rem' }}>
             <Card.Header>
@@ -43,7 +47,7 @@ const PrevWorkoutPanel = ({ name, prevWorkouts, onAddExercise }) => {
                             <TempExerciseCard
                                 type='prev'
                                 exercise={item}
-                                onAdd={onAddExercise}
+                                onAdd={onAddPastExercise}
                             />
                         ))}
                     </CardColumns>)
